@@ -2,7 +2,7 @@ var sys = require('sys');
 var http = require('http');
 var url = require('url');
 var fs = require('fs');
-
+var mongoHandler = require('mongoHandler');
 
 var server = http.createServer(function(req, res) {
     fs.readFile('./index.html', 'utf-8', function(error, content) {
@@ -13,28 +13,37 @@ var server = http.createServer(function(req, res) {
 
 var io = require('socket.io').listen(server);
 
-var clients = 0;
-
 io.sockets.on('connection', function (socket) {
-    console.log('A user has connected to the chat server');
+    console.log('A user has connected to the server');
     socket.broadcast.emit('new_user');
-    clients++;
 
-    socket.on('user_left', function(){
-        socket.emit('user_left');
-        console.log('User has left the room');
-        clients--;
-    });
-
-    socket.on('num_clients', function(){
-        socket.emit('num_clients', clients);
+    /* Chat related listeners */
+    //TODO: Add username related information
+    socket.on('chat_user_join', function(){
+    	socket.broadcast.emit('user_join_chat');
+    	console.log('A user has joined a chat room');
     })
 
-    socket.on('new_message', function (message) {
+    socket.on('chat_user_left', function(){
+        socket.broadcast.emit('user_left');
+        console.log('User has left the chat room');
+    });
+
+    socket.on('chat_new_message', function (message) {
         console.log('New message posted in the chat: ' + message);
         socket.broadcast.emit('new_message', message);
     });
+
+
+    /* Match related listeners */
+    socket.on('profile_received', function(profile){
+    	var username = profile.username;
+    	var band1 = profile.band1;
+    	var band2 = profile.band2;
+    	var band3 = profile.band3;
+
+    	mongoHandler.insertProfile(username, band1, band2, band3);
+    }
 });
 server.listen(8080);
 console.log("Server Running on 8080");
-

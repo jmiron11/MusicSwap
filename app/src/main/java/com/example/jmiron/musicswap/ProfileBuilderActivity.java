@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 
 public class ProfileBuilderActivity extends ActionBarActivity {
@@ -12,6 +13,17 @@ public class ProfileBuilderActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_builder);
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
+        if(savedInstanceState == null)
+        {
+            ProfileBuilderFragment pbf = ProfileBuilderFragment.newInstance();
+            getFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.profile_content_frame, pbf)
+                    .commit();
+        }
     }
 
 

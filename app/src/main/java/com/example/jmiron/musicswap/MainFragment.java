@@ -2,6 +2,7 @@ package com.example.jmiron.musicswap;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ public class MainFragment extends Fragment {
 
     private Button chatBtn;
     private Button suggestBtn;
+    private Button editProfileBtn;
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -51,8 +53,21 @@ public class MainFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
+        SharedPreferences profile = getActivity().getSharedPreferences("default", 0);
+        SharedPreferences.Editor profileEditor = profile.edit();
+
+        boolean firstStart = profile.getBoolean("first", true);
+
+        if(firstStart){
+            if(getActivity() != null){
+                NewUserDialogFragment newUserDialog = new NewUserDialogFragment();
+                newUserDialog.show(getFragmentManager(), "New User");
+            }
+        }
+
         chatBtn = (Button) view.findViewById(R.id.btnFindChat);
         suggestBtn = (Button) view.findViewById(R.id.btnSuggestArtist);
+        editProfileBtn = (Button) view.findViewById(R.id.btnEdit);
 
         chatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,14 +76,28 @@ public class MainFragment extends Fragment {
                 {
                     if(MainActivity.mSocket.connected())
                     {
+                        //TODO: Add username to joining chat
+                        MainActivity.mSocket.emit("chat_user_join");
                         Intent intent = new Intent(getActivity(), ChatActivity.class);
                         startActivity(intent);
                     }
                     else
                     {
                         NoConnectionDialogFragment noConnDialog = new NoConnectionDialogFragment();
-                        noConnDialog.show(getFragmentManager(), "noConnDialog");
+                        noConnDialog.show(getFragmentManager(), "No Connection");
                     }
+                }
+            }
+        });
+
+        editProfileBtn.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                if(getActivity() != null)
+                {
+                    Intent intent = new Intent(getActivity(), ProfileBuilderActivity.class);
+                    startActivity(intent);
                 }
             }
         });

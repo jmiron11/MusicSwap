@@ -13,4 +13,7 @@
     <string name="back">Back</string>
     <string name="try_connect">Attempt to Connect</string>
     <string name="failed_to_connect">Failed to Connect</string>
+    <string name="cont">Continue</string>
+    <string name="new_user">Enter a username: </string>
+
 </resources>

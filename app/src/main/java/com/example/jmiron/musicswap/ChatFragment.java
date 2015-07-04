@@ -144,9 +144,10 @@ public class ChatFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mSocket.emit("user_left");
-        mSocket.off("new_message", onNewMessage);
-        mSocket.off("new_user", onNewUser);
+        //TODO: Add username to leaving chat
+        mSocket.emit("chat_user_left");
+        mSocket.off("chat_new_message", onNewMessage);
+        mSocket.off("chat_new_user", onNewUser);
     }
 
 
@@ -158,9 +159,10 @@ public class ChatFragment extends Fragment {
             return;
         }
 
+        //TODO: Add username along with message
         mInputText.setText("");
         addMessage(toSend);
-        mSocket.emit("new_message", toSend);
+        mSocket.emit("chat_new_message", toSend);
     }
 
     public void addMessage(String message)

@@ -1,34 +1,60 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" tools:context="com.example.jmiron.musicswap.MainFragment"
-    android:weightSum="2"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:id="@+id/fragment_main">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <Button
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Find Chat"
-        android:id="@+id/btnFindChat"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/btnSuggestArtist"
-        android:layout_toLeftOf="@+id/btnSuggestArtist"
-        android:minHeight="200dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="199dp"
+        android:layout_weight="1">
 
-    <Button
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Artist Suggestion"
-        android:id="@+id/btnSuggestArtist"
-        android:minHeight="200dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            android:id="@+id/btnEdit"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:minWidth="60dp"
+            android:minHeight="60dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="187dp">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Find Chat"
+            android:id="@+id/btnFindChat"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/btnSuggestArtist"
+            android:layout_toLeftOf="@+id/btnSuggestArtist"
+            android:minHeight="200dp"
+            android:layout_gravity="bottom" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Artist Suggestion"
+            android:id="@+id/btnSuggestArtist"
+            android:minHeight="200dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="bottom" />
+    </LinearLayout>
 
 </LinearLayout>

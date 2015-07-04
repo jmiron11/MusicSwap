@@ -18,10 +18,10 @@ public class ChatActivity extends ActionBarActivity {
 
         if(savedInstanceState == null)
         {
-            ChatFragment mf = ChatFragment.newInstance();
+            ChatFragment cf = ChatFragment.newInstance();
             getFragmentManager()
                     .beginTransaction()
-                    .add(R.id.chat_content_frame, mf)
+                    .add(R.id.chat_content_frame, cf)
                     .commit();
         }
     }

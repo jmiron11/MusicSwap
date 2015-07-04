@@ -1,0 +1,14 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "mongodb": "~2.0"
+    },
+  "devDependencies": {},
+  "scripts": {
+  },
+  "author": "jmiron",
+  "license": "Apache 2.0"
+}
