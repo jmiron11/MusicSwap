@@ -15,10 +15,10 @@ public class MainActivity extends ActionBarActivity {
 
         if(savedInstanceState == null)
         {
-            MainFragment mf = MainFragment.newInstance("This is text.", "HI I AM A BUTTON");
+            MainFragment mf = MainFragment.newInstance();
             getFragmentManager()
                     .beginTransaction()
-                    .add(R.id.content_frame, mf)
+                    .add(R.id.main_content_frame, mf)
                     .commit();
         }
     }
