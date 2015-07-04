@@ -18,10 +18,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ProfileBuilder"
-            android:label="@string/title_activity_profile_builder" >
-        </activity>
-        <activity
             android:name=".ChatActivity"
             android:label="@string/title_activity_chat" >
         </activity>

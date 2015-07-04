@@ -15,9 +15,6 @@ import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
@@ -35,8 +32,8 @@ public class ChatFragment extends Fragment {
     private ListView mChatText;
     private ArrayList<String> mMessageArray = new ArrayList<String>();
     private ChatMessageAdapter mMessageAdapter;
+    private Socket mSocket = MainActivity.mSocket;
 
-    private Socket mSocket;
     private Emitter.Listener onNewMessage = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
@@ -84,16 +81,8 @@ public class ChatFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        try {
-            mSocket = IO.socket("http://10.0.2.2:8080");
-        } catch (URISyntaxException e) {
-
-        }
-        mSocket.connect();
-
         mSocket.on("new_message", onNewMessage);
         mSocket.on("new_user", onNewUser);
-
     }
 
     @Override
@@ -103,12 +92,16 @@ public class ChatFragment extends Fragment {
         View v = inflater.inflate(
                 R.layout.fragment_chat,container, false);
 
-        EditText message = (EditText) v.findViewById(R.id.chatMessage);
+        EditText msgToSend = (EditText) v.findViewById(R.id.chatMessage);
 
-//        if(savedInstanceState != null){
-//            message.setText(savedInstanceState.getCharSequence(
-//                    "MessageText"));
-//        }
+        if(savedInstanceState != null){
+            msgToSend.setText(savedInstanceState.getCharSequence(
+                    "MessageText"));
+            ArrayList<String> prevData = savedInstanceState.getStringArrayList("ListData");
+            for (String chatMsg : prevData){
+                mMessageArray.add(chatMsg);
+            }
+        }
 
         return v;
     }
@@ -140,6 +133,7 @@ public class ChatFragment extends Fragment {
         View v=getView();
         EditText message = (EditText) v.findViewById(R.id.chatMessage);
         outState.putCharSequence("MessageText", message.getText());
+        outState.putStringArrayList("ListData", mMessageArray);
     }
 
     @Override
@@ -151,8 +145,8 @@ public class ChatFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         mSocket.emit("user_left");
-        mSocket.disconnect();
         mSocket.off("new_message", onNewMessage);
+        mSocket.off("new_user", onNewUser);
     }
 
 

@@ -59,8 +59,16 @@ public class MainFragment extends Fragment {
             public void onClick(View v) {
                 if(getActivity() != null)
                 {
-                    Intent intent = new Intent(getActivity(), ChatActivity.class);
-                    startActivity(intent);
+                    if(MainActivity.mSocket.connected())
+                    {
+                        Intent intent = new Intent(getActivity(), ChatActivity.class);
+                        startActivity(intent);
+                    }
+                    else
+                    {
+                        NoConnectionDialogFragment noConnDialog = new NoConnectionDialogFragment();
+                        noConnDialog.show(getFragmentManager(), "noConnDialog");
+                    }
                 }
             }
         });
