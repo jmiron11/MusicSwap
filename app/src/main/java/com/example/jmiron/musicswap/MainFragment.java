@@ -1,6 +1,8 @@
 package com.example.jmiron.musicswap;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -53,7 +55,7 @@ public class MainFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
-        SharedPreferences profile = getActivity().getSharedPreferences("default", 0);
+        SharedPreferences profile = getActivity().getSharedPreferences("UserInfo", 0);
         SharedPreferences.Editor profileEditor = profile.edit();
 
         boolean firstStart = profile.getBoolean("first", true);
@@ -125,4 +127,5 @@ public class MainFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
     }
+
 }

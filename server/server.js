@@ -36,14 +36,15 @@ io.sockets.on('connection', function (socket) {
 
 
     /* Match related listeners */
-    socket.on('profile_received', function(profile){
+    socket.on('new_profile', function(profile){
+    	console.log("Received profile");
     	var username = profile.username;
     	var band1 = profile.band1;
     	var band2 = profile.band2;
     	var band3 = profile.band3;
 
-    	mongoHandler.insertProfile(username, band1, band2, band3);
-    }
+    	mongoHandler.modifyProfile(username, band1, band2, band3);
+    });
 });
 server.listen(8080);
 console.log("Server Running on 8080");

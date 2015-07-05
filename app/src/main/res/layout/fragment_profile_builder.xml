@@ -105,5 +105,13 @@
             android:text="Change Username"
             android:id="@+id/btnChangeUsername"
             android:layout_weight="0.10" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:id="@+id/btnSave"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.10" />
     </LinearLayout>
 </RelativeLayout>

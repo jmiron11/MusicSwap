@@ -1,13 +1,16 @@
 package com.example.jmiron.musicswap;
 
+import android.app.DialogFragment;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 
-public class ProfileBuilderActivity extends ActionBarActivity {
+public class ProfileBuilderActivity extends ActionBarActivity implements NewUserDialogFragment.NewUserDialogListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,4 +51,13 @@ public class ProfileBuilderActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onNewUserContinue(DialogFragment dialog){
+        TextView username = (TextView) this.findViewById(R.id.username);
+        SharedPreferences profile = this.getSharedPreferences("UserInfo", 0);
+        SharedPreferences.Editor profileEditor =  profile.edit();
+        username.setText(profile.getString("username", "No Profile"));
+    }
+
 }

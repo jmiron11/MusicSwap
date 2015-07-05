@@ -1,5 +1,6 @@
 package com.example.jmiron.musicswap;
 
+import android.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +11,7 @@ import com.github.nkzawa.socketio.client.Socket;
 
 import java.net.URISyntaxException;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements NewUserDialogFragment.NewUserDialogListener {
 
     public static Socket mSocket;
 
@@ -55,5 +56,10 @@ public class MainActivity extends ActionBarActivity {
         } catch (Exception e){
             Log.e("IDK","Error closing socket");
         }
+    }
+
+    @Override
+    public void onNewUserContinue(DialogFragment dialog){
+        //update the main screen
     }
 }
