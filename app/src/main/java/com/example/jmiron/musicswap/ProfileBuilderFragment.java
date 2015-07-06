@@ -106,6 +106,9 @@ public class ProfileBuilderFragment extends Fragment{
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                if(!mSocket.connected()){
+                    MainActivity.connectToServer();
+                }
                 mSocket.emit("new_profile", new_profile);
             }
         });

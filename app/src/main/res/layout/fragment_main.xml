@@ -2,55 +2,152 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" tools:context="com.example.jmiron.musicswap.MainFragment"
     android:orientation="vertical"
-    android:id="@+id/fragment_main">
-
-    <!-- TODO: Update blank fragment layout -->
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="199dp"
-        android:layout_weight="1">
-
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Edit"
-            android:id="@+id/btnEdit"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:minWidth="60dp"
-            android:minHeight="60dp" />
-    </RelativeLayout>
+    android:id="@+id/fragment_main"
+    android:weightSum="1">
 
     <LinearLayout
-        android:weightSum="2"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="187dp">
+        android:layout_height="wrap_content"
+        android:layout_weight="0.8"
+        android:weightSum = "1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2">
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit"
+                android:id="@+id/btnEdit"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:minWidth="60dp"
+                android:minHeight="60dp"
+                android:layout_weight="0.64" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Username"
+                android:id="@+id/UpperUsername"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignBottom="@+id/btnEdit"
+                android:layout_toLeftOf="@+id/btnEdit"
+                android:layout_toStartOf="@+id/btnEdit"
+                android:textStyle="bold"
+                android:textSize="50dp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:weightSum="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/albumArt1"
+                android:layout_weight="0.3"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Band 1"
+                android:id="@+id/mainBand1"
+                android:paddingTop="4dp"
+                android:textSize="30dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:weightSum="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:id="@+id/albumArt2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Band 2"
+                android:id="@+id/mainBand2"
+                android:paddingTop="4dp"
+                android:textSize="30dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:weightSum="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/albumArt3"
+                android:layout_weight="0.3"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Band 3"
+                android:id="@+id/mainBand3"
+                android:paddingTop="4dp"
+                android:textSize="30dp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_weight="0.2">
 
         <Button
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Find Chat"
+            android:layout_weight="0.5"
+            android:text="Chat Test"
             android:id="@+id/btnFindChat"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_toStartOf="@+id/btnSuggestArtist"
             android:layout_toLeftOf="@+id/btnSuggestArtist"
-            android:minHeight="200dp"
             android:layout_gravity="bottom" />
 
         <Button
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Artist Suggestion"
+            android:layout_weight="0.5"
+            android:text="Music Swap"
             android:id="@+id/btnSuggestArtist"
-            android:minHeight="200dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
