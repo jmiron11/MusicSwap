@@ -45,10 +45,6 @@ io.sockets.on('connection', function (socket) {
 
     	mongoHandler.modifyProfile(username, band1, band2, band3);
     });
-
-    socket.on('find_chat_match', function(){
-    	mongoHandler.
-    })
 });
 server.listen(8080);
 console.log("Server Running on 8080");

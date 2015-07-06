@@ -1,8 +1,6 @@
 package com.example.jmiron.musicswap;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 
 /**
@@ -23,6 +23,18 @@ public class MainFragment extends Fragment {
     private Button chatBtn;
     private Button suggestBtn;
     private Button editProfileBtn;
+
+    SharedPreferences profile;
+    SharedPreferences.Editor profileEditor;
+
+    private TextView username;
+    private TextView band1;
+    private TextView band2;
+    private TextView band3;
+    private ImageView albumArt1;
+    private ImageView albumArt2;
+    private ImageView albumArt3;
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -55,8 +67,20 @@ public class MainFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
-        SharedPreferences profile = getActivity().getSharedPreferences("UserInfo", 0);
-        SharedPreferences.Editor profileEditor = profile.edit();
+        username = (TextView) view.findViewById(R.id.UpperUsername);
+        band1 = (TextView) view.findViewById(R.id.mainBand1);
+        band2 = (TextView) view.findViewById(R.id.mainBand2);
+        band3 = (TextView) view.findViewById(R.id.mainBand3);
+        albumArt1 = (ImageView) view.findViewById(R.id.albumArt1);
+        albumArt2 = (ImageView) view.findViewById(R.id.albumArt2);
+        albumArt3 = (ImageView) view.findViewById(R.id.albumArt3);
+
+        albumArt1.setImageResource(R.drawable.albumartph40);
+        albumArt2.setImageResource(R.drawable.albumartph40);
+        albumArt3.setImageResource(R.drawable.albumartph40);
+
+        profile = getActivity().getSharedPreferences("UserInfo", 0);
+        profileEditor = profile.edit();
 
         boolean firstStart = profile.getBoolean("first", true);
 
@@ -65,6 +89,10 @@ public class MainFragment extends Fragment {
                 NewUserDialogFragment newUserDialog = new NewUserDialogFragment();
                 newUserDialog.show(getFragmentManager(), "New User");
             }
+        }
+        else
+        {
+            loadData();
         }
 
         chatBtn = (Button) view.findViewById(R.id.btnFindChat);
@@ -128,4 +156,31 @@ public class MainFragment extends Fragment {
         super.onDetach();
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        loadData();
+    }
+
+    private void loadData() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final String tempUsername = profile.getString("username", "No Profile");
+                final String tempBand1 = profile.getString("band1", "Band 1");
+                final String tempBand2 = profile.getString("band2", "Band 2");
+                final String tempBand3 = profile.getString("band3", "Band 3");
+
+                getActivity().runOnUiThread(new Runnable(){
+                        @Override
+                        public void run(){
+                            username.setText(tempUsername);
+                            band1.setText(tempBand1);
+                            band2.setText(tempBand2);
+                            band3.setText(tempBand3);
+                        }
+                    });
+                }
+        }).start();
+    }
 }

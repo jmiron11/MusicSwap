@@ -96,20 +96,32 @@ public class ProfileBuilderFragment extends Fragment{
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveData();
-                JSONObject new_profile = new JSONObject();
-                try {
-                    new_profile.put("username", username.getText());
-                    new_profile.put("band1", band1.getText());
-                    new_profile.put("band2", band2.getText());
-                    new_profile.put("band3", band3.getText());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                if(!mSocket.connected()){
-                    MainActivity.connectToServer();
-                }
-                mSocket.emit("new_profile", new_profile);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        saveData();
+                        JSONObject new_profile = new JSONObject();
+                        try {
+                            new_profile.put("username", username.getText());
+                            new_profile.put("band1", band1.getText());
+                            new_profile.put("band2", band2.getText());
+                            new_profile.put("band3", band3.getText());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if(!mSocket.connected()){
+                            MainActivity.connectToServer();
+                        }
+                        mSocket.emit("new_profile", new_profile);
+
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                getActivity().finish();
+                            }
+                        });
+                    }
+                }).start();
             }
         });
 
@@ -174,17 +186,37 @@ public class ProfileBuilderFragment extends Fragment{
     }
 
     private void loadData() {
-        username.setText(profile.getString("username", "No Profile"));
-        band1.setText(profile.getString("band1", "Band 1"));
-        band2.setText(profile.getString("band2", "Band 2"));
-        band3.setText(profile.getString("band3", "Band 3"));
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final String tempUsername = profile.getString("username", "No Profile");
+                final String tempBand1 = profile.getString("band1", "Band 1");
+                final String tempBand2 = profile.getString("band2", "Band 2");
+                final String tempBand3 = profile.getString("band3", "Band 3");
+
+                getActivity().runOnUiThread(new Runnable(){
+                    @Override
+                    public void run(){
+                        username.setText(tempUsername);
+                        band1.setText(tempBand1);
+                        band2.setText(tempBand2);
+                        band3.setText(tempBand3);
+                    }
+                });
+            }
+        }).start();
     }
 
     private void saveData(){
-        profileEditor.putString("username", username.getText().toString().trim());
-        profileEditor.putString("band1", band1.getText().toString().trim());
-        profileEditor.putString("band2", band2.getText().toString().trim());
-        profileEditor.putString("band3", band3.getText().toString().trim());
-        profileEditor.commit();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                profileEditor.putString("username", username.getText().toString().trim());
+                profileEditor.putString("band1", band1.getText().toString().trim());
+                profileEditor.putString("band2", band2.getText().toString().trim());
+                profileEditor.putString("band3", band3.getText().toString().trim());
+                profileEditor.commit();
+            }
+        }).start();
     }
 }

@@ -1,5 +1,6 @@
 package com.example.jmiron.musicswap;
 
+import android.app.Activity;
 import android.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -11,7 +12,7 @@ import com.github.nkzawa.socketio.client.Socket;
 
 import java.net.URISyntaxException;
 
-public class MainActivity extends ActionBarActivity implements NewUserDialogFragment.NewUserDialogListener {
+public class MainActivity extends Activity implements NewUserDialogFragment.NewUserDialogListener {
 
     public static Socket mSocket;
 

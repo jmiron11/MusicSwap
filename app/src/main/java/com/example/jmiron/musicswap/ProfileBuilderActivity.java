@@ -1,5 +1,6 @@
 package com.example.jmiron.musicswap;
 
+import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
@@ -10,7 +11,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 
-public class ProfileBuilderActivity extends ActionBarActivity implements NewUserDialogFragment.NewUserDialogListener{
+public class ProfileBuilderActivity extends Activity implements NewUserDialogFragment.NewUserDialogListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

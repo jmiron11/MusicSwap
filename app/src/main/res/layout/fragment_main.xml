@@ -3,19 +3,21 @@
     android:layout_height="match_parent" tools:context="com.example.jmiron.musicswap.MainFragment"
     android:orientation="vertical"
     android:id="@+id/fragment_main"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="#C9BEB0">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.8"
-        android:weightSum = "1">
+        android:weightSum = "0.9"
+        android:padding="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.2">
+            android:id="@+id/row1">
 
             <Button
                 style="?android:attr/buttonStyleSmall"
@@ -26,9 +28,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:minWidth="60dp"
-                android:minHeight="60dp"
-                android:layout_weight="0.64" />
+                android:layout_weight="0.64"
+                android:background="@drawable/mainbutton" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -39,35 +40,51 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_alignBottom="@+id/btnEdit"
                 android:layout_toLeftOf="@+id/btnEdit"
                 android:layout_toStartOf="@+id/btnEdit"
                 android:textStyle="bold"
-                android:textSize="50dp" />
+                android:textSize="40dp" />
         </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="3dp"
+            android:background="#A89781"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="10dp"
+            android:background="#C9BEB0"
+            android:id="@+id/spacer1" />
+
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:id="@+id/row2"
+            android:background="@drawable/mainbanddisplay">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/albumArt1"
-                android:layout_weight="0.3"/>
+                android:layout_weight="0.15"
+                android:layout_gravity="left|center" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.7"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.85"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Band 1"
                 android:id="@+id/mainBand1"
-                android:paddingTop="4dp"
-                android:textSize="30dp" />
+                android:textSize="20dp"
+                android:minLines="1"
+                android:maxLines="2"
+                android:gravity="left|center" />
         </LinearLayout>
 
         <LinearLayout
@@ -75,23 +92,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:id="@+id/row3"
+            android:background="@drawable/mainbanddisplay">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.3"
-                android:id="@+id/albumArt2" />
+                android:layout_weight="0.15"
+                android:id="@+id/albumArt2"
+                android:layout_gravity="left|center" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.7"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.85"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Band 2"
                 android:id="@+id/mainBand2"
-                android:paddingTop="4dp"
-                android:textSize="30dp" />
+                android:textSize="20dp"
+                android:minLines="1"
+                android:maxLines="2"
+                android:gravity="left|center" />
 
         </LinearLayout>
 
@@ -100,23 +122,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:id="@+id/row4"
+            android:background="@drawable/mainbanddisplay">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/albumArt3"
-                android:layout_weight="0.3"/>
+                android:layout_weight="0.15"
+                android:layout_gravity="left|center" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.7"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.85"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Band 3"
                 android:id="@+id/mainBand3"
-                android:paddingTop="4dp"
-                android:textSize="30dp" />
+                android:textSize="20dp"
+                android:minLines="1"
+                android:maxLines="2"
+                android:gravity="left|center" />
         </LinearLayout>
 
 
@@ -140,7 +167,9 @@
             android:layout_alignParentStart="true"
             android:layout_toStartOf="@+id/btnSuggestArtist"
             android:layout_toLeftOf="@+id/btnSuggestArtist"
-            android:layout_gravity="bottom" />
+            android:layout_gravity="bottom"
+            android:background="@drawable/mainbutton"
+            android:padding="0dp" />
 
         <Button
             android:layout_width="match_parent"
@@ -151,7 +180,9 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_gravity="bottom" />
+            android:layout_gravity="bottom"
+            android:background="@drawable/mainbutton"
+            android:padding="0dp" />
     </LinearLayout>
 
 </LinearLayout>
