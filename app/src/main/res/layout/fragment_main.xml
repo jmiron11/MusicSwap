@@ -64,8 +64,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
             android:weightSum="1"
-            android:id="@+id/row2"
-            android:background="@drawable/mainbanddisplay">
+            android:id="@+id/band1row"
+            android:background="@drawable/mainbanddisplay"
+            android:clickable="true">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -93,8 +94,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
             android:weightSum="1"
-            android:id="@+id/row3"
-            android:background="@drawable/mainbanddisplay">
+            android:id="@+id/band2row"
+            android:background="@drawable/mainbanddisplay"
+            android:clickable="true">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -123,8 +125,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
             android:weightSum="1"
-            android:id="@+id/row4"
-            android:background="@drawable/mainbanddisplay">
+            android:id="@+id/band3row"
+            android:background="@drawable/mainbanddisplay"
+            android:clickable="true">
 
             <ImageView
                 android:layout_width="wrap_content"

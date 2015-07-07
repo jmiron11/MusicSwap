@@ -15,5 +15,6 @@
     <string name="failed_to_connect">Failed to Connect</string>
     <string name="cont">Continue</string>
     <string name="new_user">Enter a username: </string>
+    <string name="title_activity_artist_profile">ArtistProfileActivity</string>
 
 </resources>
