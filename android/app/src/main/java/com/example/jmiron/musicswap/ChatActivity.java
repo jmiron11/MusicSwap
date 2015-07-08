@@ -23,11 +23,7 @@ public class ChatActivity extends FragmentActivity {
 
         if(savedInstanceState == null)
         {
-            ChatFragment cf = ChatFragment.newInstance();
-            getFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.chat_content_frame, cf)
-                    .commit();
+            startChatFragment();
         }
     }
 
@@ -51,5 +47,13 @@ public class ChatActivity extends FragmentActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void startChatFragment(){
+        ChatFragment cf = ChatFragment.newInstance();
+        getFragmentManager()
+                .beginTransaction()
+                .add(R.id.chat_content_frame, cf)
+                .commit();
     }
 }

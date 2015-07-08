@@ -92,11 +92,12 @@ public class ChatFragment extends Fragment {
         View v = inflater.inflate(
                 R.layout.fragment_chat,container, false);
 
+        /* restore the previous chat data */
         EditText msgToSend = (EditText) v.findViewById(R.id.chatMessage);
-
         if(savedInstanceState != null){
             msgToSend.setText(savedInstanceState.getCharSequence(
                     "MessageText"));
+            /* copy old text data to the new emptied message array */
             ArrayList<String> prevData = savedInstanceState.getStringArrayList("ListData");
             for (String chatMsg : prevData){
                 mMessageArray.add(chatMsg);
@@ -109,9 +110,10 @@ public class ChatFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
+        /* attatch class gui variables */
         mInputText = (EditText) view.findViewById(R.id.chatMessage);
         mChatText = (ListView) view.findViewById(R.id.listView);
-        mChatText.setAdapter(mMessageAdapter);
+        mChatText.setAdapter(mMessageAdapter); // assign the adapter to the
 
         Button sendBtn = (Button) view.findViewById(R.id.btnSend);
         sendBtn.setOnClickListener(new Button.OnClickListener() {

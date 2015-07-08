@@ -21,8 +21,8 @@ import android.widget.TextView;
  */
 public class MainFragment extends Fragment {
 
-    SharedPreferences profile;
-    SharedPreferences.Editor profileEditor;
+    private SharedPreferences profile;
+    private SharedPreferences.Editor profileEditor;
 
     private ImageView song1Art;
     private ImageView song2Art;
@@ -71,56 +71,25 @@ public class MainFragment extends Fragment {
         song1 = (TextView) view.findViewById(R.id.topSong1);
         song2 = (TextView) view.findViewById(R.id.topSong2);
         song3 = (TextView) view.findViewById(R.id.topSong3);
-
         song1Art = (ImageView) view.findViewById(R.id.songArt1);
         song2Art = (ImageView) view.findViewById(R.id.songArt2);
         song3Art = (ImageView) view.findViewById(R.id.songArt3);
-
         artistArt = (ImageView) view.findViewById(R.id.lastAlbumArt);
         prevArtist = (TextView) view.findViewById(R.id.lastArtistName);
 
+        /* initialize user preferences from local data */
         profile = getActivity().getSharedPreferences("UserInfo", 0);
         profileEditor = profile.edit();
 
-        boolean firstStart = profile.getBoolean("first", true);
+        checkForPrevProfile();
 
-        if(firstStart){
-            if(getActivity() != null){
-                NewUserDialogFragment newUserDialog = new NewUserDialogFragment();
-                newUserDialog.show(getActivity().getSupportFragmentManager(), "New User");
-            }
-        }
-        else
-        {
-            loadData();
-        }
-
+        /* assign button on click listeners */
         Button chatBtn = (Button) view.findViewById(R.id.btnFindChat);
+        chatBtn.setOnClickListener(onChatClick());
+
         Button suggestBtn = (Button) view.findViewById(R.id.btnSuggestArtist);
+        suggestBtn.setOnClickListener(onSwapClick());
 
-        chatBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (getActivity() != null) {
-                    if (MainActivity.mSocket.connected()) {
-                        //TODO: Add username to joining chat
-                        MainActivity.mSocket.emit("chat_user_join");
-                        Intent intent = new Intent(getActivity(), ChatActivity.class);
-                        startActivity(intent);
-                    } else {
-                        NoConnectionDialogFragment noConnDialog = new NoConnectionDialogFragment();
-                        noConnDialog.show(getActivity().getSupportFragmentManager(), "No Connection");
-                    }
-                }
-            }
-        });
-
-        suggestBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         /* Set album art */
         song1Art.setImageResource(R.drawable.albumartph40);
@@ -191,4 +160,50 @@ public class MainFragment extends Fragment {
 
         return ret;
     }
+
+    private void checkForPrevProfile(){
+        boolean firstStart = profile.getBoolean("first", true);
+
+        if(firstStart){
+            if(getActivity() != null){
+                NewUserDialogFragment newUserDialog = new NewUserDialogFragment();
+                newUserDialog.show(getActivity().getSupportFragmentManager(), "New User");
+            }
+        }
+        else
+        {
+            loadData();
+        }
+    }
+
+    private Button.OnClickListener onChatClick(){
+        Button.OnClickListener ret = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getActivity() != null) {
+                    if (MainActivity.mSocket.connected()) {
+                        //TODO: Add username to joining chat
+                        MainActivity.mSocket.emit("chat_user_join");
+                        Intent intent = new Intent(getActivity(), ChatActivity.class);
+                        startActivity(intent);
+                    } else {
+                        NoConnectionDialogFragment noConnDialog = new NoConnectionDialogFragment();
+                        noConnDialog.show(getActivity().getSupportFragmentManager(), "No Connection");
+                    }
+                }
+            }
+        };
+        return ret;
+    }
+
+    private Button.OnClickListener onSwapClick(){
+        Button.OnClickListener ret = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        };
+        return ret;
+    }
+
 }

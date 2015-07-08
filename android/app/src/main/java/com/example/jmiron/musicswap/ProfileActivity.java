@@ -21,11 +21,7 @@ public class ProfileActivity extends FragmentActivity implements NewUserDialogFr
 
         if(savedInstanceState == null)
         {
-            ProfileFragment pbf = ProfileFragment.newInstance();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.profile_content_frame, pbf)
-                    .commit();
+            startProfileFragment();
         }
     }
 
@@ -56,8 +52,15 @@ public class ProfileActivity extends FragmentActivity implements NewUserDialogFr
     public void onNewUserContinue(DialogFragment dialog){
         TextView username = (TextView) this.findViewById(R.id.username);
         SharedPreferences profile = this.getSharedPreferences("UserInfo", 0);
-        SharedPreferences.Editor profileEditor =  profile.edit();
         username.setText(profile.getString("username", "No Profile"));
+    }
+
+    private void startProfileFragment(){
+        ProfileFragment pbf = ProfileFragment.newInstance();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.profile_content_frame, pbf)
+                .commit();
     }
 
 }

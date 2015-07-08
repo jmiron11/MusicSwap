@@ -21,16 +21,16 @@ import org.json.JSONObject;
  * A placeholder fragment containing a simple view.
  */
 public class ProfileFragment extends Fragment {
-    SharedPreferences.Editor profileEditor;
-    SharedPreferences profile;
+    private SharedPreferences.Editor profileEditor;
+    private SharedPreferences profile;
 
-    TextView username;
-    TextView artist1;
-    TextView artist2;
-    TextView artist3;
-    ImageView albumArt1;
-    ImageView albumArt2;
-    ImageView albumArt3;
+    private TextView username;
+    private TextView artist1;
+    private TextView artist2;
+    private TextView artist3;
+    private ImageView albumArt1;
+    private ImageView albumArt2;
+    private ImageView albumArt3;
 
     private Socket mSocket = MainActivity.mSocket;
 
@@ -62,6 +62,7 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        /* initialize class gui variables */
         username = (TextView) v.findViewById(R.id.username);
         artist1 = (TextView) v.findViewById(R.id.editBand1);
         artist2 = (TextView) v.findViewById(R.id.editBand2);
@@ -75,8 +76,9 @@ public class ProfileFragment extends Fragment {
         albumArt2.setImageResource(R.drawable.albumartph40);
         albumArt3.setImageResource(R.drawable.albumartph40);
 
-        loadData();
+        loadData(); // load profile data from phone
 
+        /* if there is typed data that hasn't been saved */
         if(savedInstanceState != null){
             username.setText(savedInstanceState.getCharSequence("username"));
             artist1.setText(savedInstanceState.getCharSequence("artist1"));
@@ -84,46 +86,12 @@ public class ProfileFragment extends Fragment {
             artist3.setText(savedInstanceState.getCharSequence("artist3"));
         }
 
-
-
+        /* set button OnClickListeners */
         Button changeUsernameBtn = (Button) v.findViewById(R.id.btnChangeUsername);
-        changeUsernameBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(getActivity() != null)
-                {
-                    NewUserDialogFragment newUserDialog = new NewUserDialogFragment();
-                    newUserDialog.show(getActivity().getSupportFragmentManager(), "New User");
-                    username.setText(profile.getString("username", "No Username"));
-                }
-            }
-        });
+        changeUsernameBtn.setOnClickListener(onChangeUserClick());
 
         Button saveButton = (Button) v.findViewById(R.id.btnSave);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        saveData();
-                        JSONObject new_profile = new JSONObject();
-                        try {
-                            new_profile.put("username", username.getText());
-                            new_profile.put("artist1", artist1.getText());
-                            new_profile.put("artist2", artist2.getText());
-                            new_profile.put("artist3", artist3.getText());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        if(!mSocket.connected()){
-                            MainActivity.connectToServer();
-                        }
-                        mSocket.emit("new_profile", new_profile);
-                    }
-                }).start();
-            }
-        });
+        saveButton.setOnClickListener(onSaveClick());
 
         return v;
     }
@@ -185,5 +153,47 @@ public class ProfileFragment extends Fragment {
                 profileEditor.commit();
             }
         }).start();
+    }
+
+    private Button.OnClickListener onChangeUserClick() {
+        Button.OnClickListener ret = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getActivity() != null) {
+                    NewUserDialogFragment newUserDialog = new NewUserDialogFragment();
+                    newUserDialog.show(getActivity().getSupportFragmentManager(), "New User");
+                    username.setText(profile.getString("username", "No Username"));
+                }
+            }
+        };
+        return ret;
+    }
+
+    private Button.OnClickListener onSaveClick(){
+        Button.OnClickListener ret = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        saveData();
+                        JSONObject new_profile = new JSONObject();
+                        try {
+                            new_profile.put("username", username.getText());
+                            new_profile.put("artist1", artist1.getText());
+                            new_profile.put("artist2", artist2.getText());
+                            new_profile.put("artist3", artist3.getText());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if (!mSocket.connected()) {
+                            MainActivity.connectToServer();
+                        }
+                        mSocket.emit("new_profile", new_profile);
+                    }
+                }).start();
+            }
+        };
+        return ret;
     }
 }

@@ -38,6 +38,7 @@ public class MainActivity extends FragmentActivity implements NewUserDialogFragm
             Log.e("NOCONN", "Error connecting dayummm");
         }
 
+        /* Set up horizontal paging (swipe) */
         mAdapter = new MainPagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.mainPager);
         mViewPager.setAdapter(mAdapter);
@@ -48,7 +49,7 @@ public class MainActivity extends FragmentActivity implements NewUserDialogFragm
 
     public static void connectToServer(){
         try {
-            mSocket = IO.socket("http://10.0.2.2:8080");
+            mSocket = IO.socket("http://10.0.2.2:8080"); // initialize the io.socket websocket
         } catch (URISyntaxException e) {
             Log.e("IDK", "Error creating socket");
         }
@@ -58,6 +59,8 @@ public class MainActivity extends FragmentActivity implements NewUserDialogFragm
     @Override
     protected void onDestroy(){
         super.onDestroy();
+
+        /* disconnect the websocket */
         try {
             mSocket.close();
             mSocket.disconnect();
