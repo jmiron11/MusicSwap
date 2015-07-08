@@ -1,15 +1,19 @@
-package com.example.jmiron.musicswap;
+package com.example.jmiron.musicswap.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.example.jmiron.musicswap.fragments.PreviousMatchFragment;
+import com.example.jmiron.musicswap.fragments.MainFragment;
+import com.example.jmiron.musicswap.fragments.ProfileFragment;
 
 /**
  * Created by jmiron on 7/7/2015.
  */
 public class MainPagerAdapter extends FragmentPagerAdapter {
 
-    MainPagerAdapter(FragmentManager fm){
+    public MainPagerAdapter(FragmentManager fm){
         super(fm);
     }
 

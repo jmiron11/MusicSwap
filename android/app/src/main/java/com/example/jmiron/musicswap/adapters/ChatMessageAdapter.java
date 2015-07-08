@@ -1,4 +1,4 @@
-package com.example.jmiron.musicswap;
+package com.example.jmiron.musicswap.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.example.jmiron.musicswap.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

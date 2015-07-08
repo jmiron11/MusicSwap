@@ -1,4 +1,4 @@
-package com.example.jmiron.musicswap;
+package com.example.jmiron.musicswap.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +13,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.jmiron.musicswap.dialogs.NoConnectionDialogFragment;
+import com.example.jmiron.musicswap.R;
+import com.example.jmiron.musicswap.activities.ChatActivity;
+import com.example.jmiron.musicswap.activities.MainActivity;
+import com.github.nkzawa.socketio.client.Socket;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,6 +29,8 @@ import android.widget.TextView;
  * create an instance of this fragment.
  */
 public class MainFragment extends Fragment {
+
+    private Socket mSocket;
 
     private SharedPreferences profile;
     private SharedPreferences.Editor profileEditor;
@@ -67,6 +78,8 @@ public class MainFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
+        mSocket = MainActivity.mSocket;
+
         /* initialize class variables */
         song1 = (TextView) view.findViewById(R.id.topSong1);
         song2 = (TextView) view.findViewById(R.id.topSong2);
@@ -81,14 +94,13 @@ public class MainFragment extends Fragment {
         profile = getActivity().getSharedPreferences("UserInfo", 0);
         profileEditor = profile.edit();
 
-        checkForPrevProfile();
 
         /* assign button on click listeners */
         Button chatBtn = (Button) view.findViewById(R.id.btnFindChat);
         chatBtn.setOnClickListener(onChatClick());
 
-        Button suggestBtn = (Button) view.findViewById(R.id.btnSuggestArtist);
-        suggestBtn.setOnClickListener(onSwapClick());
+        Button swapBtn = (Button) view.findViewById(R.id.btnSuggestArtist);
+        swapBtn.setOnClickListener(onSwapClick());
 
 
         /* Set album art */
@@ -161,20 +173,7 @@ public class MainFragment extends Fragment {
         return ret;
     }
 
-    private void checkForPrevProfile(){
-        boolean firstStart = profile.getBoolean("first", true);
 
-        if(firstStart){
-            if(getActivity() != null){
-                NewUserDialogFragment newUserDialog = new NewUserDialogFragment();
-                newUserDialog.show(getActivity().getSupportFragmentManager(), "New User");
-            }
-        }
-        else
-        {
-            loadData();
-        }
-    }
 
     private Button.OnClickListener onChatClick(){
         Button.OnClickListener ret = new View.OnClickListener() {
@@ -200,6 +199,28 @@ public class MainFragment extends Fragment {
         Button.OnClickListener ret = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(mSocket.connected())
+                {
+                    final String username = profile.getString("username", "No Profile");
+                    final String artist1 = profile.getString("artist1", "Artist 1");
+                    final String artist2 = profile.getString("artist2", "Artist 2");
+                    final String artist3 = profile.getString("artist3", "Artist 3");
+                    JSONObject new_profile = new JSONObject();
+                    try {
+                        new_profile.put("username", username);
+                        new_profile.put("artist1", artist1);
+                        new_profile.put("artist2", artist2);
+                        new_profile.put("artist3", artist3);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    mSocket.emit("find_match", new_profile);
+                }
+                else
+                {
+                    NoConnectionDialogFragment noConnDialog = new NoConnectionDialogFragment();
+                    noConnDialog.show(getActivity().getSupportFragmentManager(), "No Connection");
+                }
 
             }
         };

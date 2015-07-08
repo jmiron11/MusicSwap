@@ -1,4 +1,4 @@
-package com.example.jmiron.musicswap;
+package com.example.jmiron.musicswap.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -6,6 +6,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+
+import com.example.jmiron.musicswap.R;
+import com.example.jmiron.musicswap.activities.ChatActivity;
+import com.example.jmiron.musicswap.activities.MainActivity;
 
 /**
  * Created by jmiron on 7/3/2015.

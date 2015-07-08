@@ -1,4 +1,4 @@
-package com.example.jmiron.musicswap;
+package com.example.jmiron.musicswap.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -11,11 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.jmiron.musicswap.adapters.ChatMessageAdapter;
+import com.example.jmiron.musicswap.R;
+import com.example.jmiron.musicswap.activities.MainActivity;
 import com.github.nkzawa.emitter.Emitter;
-import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 

@@ -1,36 +1,38 @@
-package com.example.jmiron.musicswap;
+package com.example.jmiron.musicswap.activities;
 
-import android.app.Activity;
+import android.content.SharedPreferences;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
+
+import com.example.jmiron.musicswap.fragments.ProfileFragment;
+import com.example.jmiron.musicswap.R;
 
 
-
-public class ChatActivity extends FragmentActivity {
+public class ProfileActivity extends FragmentActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_chat);
+        setContentView(R.layout.activity_profile);
+
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         if(savedInstanceState == null)
         {
-            startChatFragment();
+            startProfileFragment();
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_chat, menu);
+        getMenuInflater().inflate(R.menu.menu_profile_builder, menu);
         return true;
     }
 
@@ -48,12 +50,20 @@ public class ChatActivity extends FragmentActivity {
 
         return super.onOptionsItemSelected(item);
     }
+//
+//    @Override
+//    public void onNewUserContinue(DialogFragment dialog){
+//        TextView username = (TextView) this.findViewById(R.id.username);
+//        SharedPreferences profile = this.getSharedPreferences("UserInfo", 0);
+//        username.setText(profile.getString("username", "No Profile"));
+//    }
 
-    private void startChatFragment(){
-        ChatFragment cf = ChatFragment.newInstance();
-        getFragmentManager()
+    private void startProfileFragment(){
+        ProfileFragment pbf = ProfileFragment.newInstance();
+        getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.chat_content_frame, cf)
+                .add(R.id.profile_content_frame, pbf)
                 .commit();
     }
+
 }

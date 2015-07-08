@@ -1,6 +1,7 @@
-package com.example.jmiron.musicswap;
+package com.example.jmiron.musicswap.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.jmiron.musicswap.R;
+import com.example.jmiron.musicswap.activities.MainActivity;
+import com.example.jmiron.musicswap.activities.NewProfileActivity;
 import com.github.nkzawa.socketio.client.Socket;
 
 import org.json.JSONException;
@@ -90,8 +94,11 @@ public class ProfileFragment extends Fragment {
         Button changeUsernameBtn = (Button) v.findViewById(R.id.btnChangeUsername);
         changeUsernameBtn.setOnClickListener(onChangeUserClick());
 
-        Button saveButton = (Button) v.findViewById(R.id.btnSave);
-        saveButton.setOnClickListener(onSaveClick());
+        Button saveBtn = (Button) v.findViewById(R.id.btnSave);
+        saveBtn.setOnClickListener(onSaveClick());
+
+        Button resetProfileBtn = (Button) v.findViewById(R.id.profileReset);
+        resetProfileBtn.setOnClickListener(onResetProfileClick());
 
         return v;
     }
@@ -160,9 +167,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (getActivity() != null) {
-                    NewUserDialogFragment newUserDialog = new NewUserDialogFragment();
-                    newUserDialog.show(getActivity().getSupportFragmentManager(), "New User");
-                    username.setText(profile.getString("username", "No Username"));
+                    //TODO: Implement change username
                 }
             }
         };
@@ -192,6 +197,17 @@ public class ProfileFragment extends Fragment {
                         mSocket.emit("new_profile", new_profile);
                     }
                 }).start();
+            }
+        };
+        return ret;
+    }
+
+    private Button.OnClickListener onResetProfileClick(){
+        Button.OnClickListener ret = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), NewProfileActivity.class);
+                startActivity(intent);
             }
         };
         return ret;
