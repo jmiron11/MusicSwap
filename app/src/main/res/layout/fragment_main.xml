@@ -12,156 +12,212 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.8"
         android:weightSum = "0.9"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:id="@+id/background_layout"
+        android:background="#303030">
 
-        <RelativeLayout
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/row1">
-
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Edit"
-                android:id="@+id/btnEdit"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_weight="0.64"
-                android:background="@drawable/mainbutton" />
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:background="@drawable/profile_background"
+            android:weightSum="1.2"
+            android:id="@+id/profile_background_layout">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Username"
-                android:id="@+id/UpperUsername"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_toLeftOf="@+id/btnEdit"
-                android:layout_toStartOf="@+id/btnEdit"
-                android:textStyle="bold"
-                android:textSize="40dp" />
-        </RelativeLayout>
+                android:text="Last Recommended Artist"
+                android:id="@+id/lastArtist"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="#d6ffffff"
+                android:layout_gravity="left|center_horizontal"
+                android:layout_marginBottom="10dp" />
 
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="3dp"
-            android:background="#A89781"/>
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="10dp"
-            android:background="#C9BEB0"
-            android:id="@+id/spacer1" />
-
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.2"
-            android:weightSum="1"
-            android:id="@+id/band1row"
-            android:background="@drawable/mainbanddisplay"
-            android:clickable="true">
-
-            <ImageView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/albumArt1"
-                android:layout_weight="0.15"
-                android:layout_gravity="left|center" />
+                android:layout_gravity="center_horizontal"
+                android:weightSum="1"
+                android:layout_marginBottom="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
+                    android:id="@+id/lastAlbumArt"
+                    android:layout_gravity="center"
+                    android:minHeight="40px"
+                    android:minWidth="40px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Artist Name"
+                    android:id="@+id/lastArtistName"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dp"
+                    android:gravity="left|center_vertical" />
+            </LinearLayout>
+
+            <View
+                    android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp" />
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.85"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Band 1"
-                android:id="@+id/mainBand1"
-                android:textSize="20dp"
-                android:minLines="1"
-                android:maxLines="2"
-                android:gravity="left|center" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.2"
-            android:weightSum="1"
-            android:id="@+id/band2row"
-            android:background="@drawable/mainbanddisplay"
-            android:clickable="true">
-
-            <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.15"
-                android:id="@+id/albumArt2"
-                android:layout_gravity="left|center" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.85"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Band 2"
-                android:id="@+id/mainBand2"
-                android:textSize="20dp"
-                android:minLines="1"
-                android:maxLines="2"
-                android:gravity="left|center" />
+                android:text="Top Tracks"
+                android:id="@+id/textView"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.2"
-            android:weightSum="1"
-            android:id="@+id/band3row"
-            android:background="@drawable/mainbanddisplay"
-            android:clickable="true">
-
-            <ImageView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/albumArt3"
-                android:layout_weight="0.15"
-                android:layout_gravity="left|center" />
+                android:weightSum="1"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.85"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Band 3"
-                android:id="@+id/mainBand3"
-                android:textSize="20dp"
-                android:minLines="1"
-                android:maxLines="2"
-                android:gravity="left|center" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
+                    android:id="@+id/songArt1"
+                    android:layout_gravity="center"
+                    android:minHeight="40px"
+                    android:minWidth="40px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Song 1"
+                    android:id="@+id/topSong1"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18dp"
+                    android:layout_gravity="left|center_vertical"
+                    android:gravity="left|center" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="30dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
+                    android:id="@+id/songArt2"
+                    android:layout_gravity="center"
+                    android:minHeight="40px"
+                    android:minWidth="40px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Song 2"
+                    android:id="@+id/topSong2"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18dp"
+                    android:layout_gravity="left|center_vertical"
+                    android:gravity="left|center" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="30dp"
+                android:orientation="vertical"
+                android:id="@+id/line1" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
+                    android:id="@+id/songArt3"
+                    android:layout_gravity="center"
+                    android:minHeight="40px"
+                    android:minWidth="40px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Song 3"
+                    android:id="@+id/topSong3"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18dp"
+                    android:layout_gravity="left|center_vertical"
+                    android:gravity="left|center" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="30dp" />
         </LinearLayout>
+
 
 
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="1"
-        android:layout_weight="0.2">
+        android:layout_weight="0.2"
+        android:background="#303030">
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:text="Chat Test"
             android:id="@+id/btnFindChat"
@@ -170,22 +226,24 @@
             android:layout_alignParentStart="true"
             android:layout_toStartOf="@+id/btnSuggestArtist"
             android:layout_toLeftOf="@+id/btnSuggestArtist"
-            android:layout_gravity="bottom"
+            android:padding="0dp"
             android:background="@drawable/mainbutton"
-            android:padding="0dp" />
+            android:layout_margin="4dp"
+            android:textColor="#b3ffffff" />
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:text="Music Swap"
             android:id="@+id/btnSuggestArtist"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_gravity="bottom"
+            android:padding="0dp"
             android:background="@drawable/mainbutton"
-            android:padding="0dp" />
+            android:layout_margin="4dp"
+            android:textColor="#b4ffffff" />
     </LinearLayout>
 
 </LinearLayout>

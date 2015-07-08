@@ -2,10 +2,10 @@ package com.example.jmiron.musicswap;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 
 /**
  * Created by jmiron on 7/3/2015.
@@ -24,7 +24,7 @@ public class NoConnectionDialogFragment extends DialogFragment {
                         }
                         else{
                             FailedToConectDialogFragment failedFrag = new FailedToConectDialogFragment();
-                            failedFrag.show(getFragmentManager(), "noConnDialog");
+                            failedFrag.show(getActivity().getSupportFragmentManager(), "noConnDialog");
                         }
                     }
                 })

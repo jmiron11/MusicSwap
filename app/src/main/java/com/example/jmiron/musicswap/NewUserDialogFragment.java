@@ -3,10 +3,10 @@ package com.example.jmiron.musicswap;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.widget.EditText;
 
@@ -16,7 +16,7 @@ import android.widget.EditText;
 public class NewUserDialogFragment extends DialogFragment {
 
     public interface NewUserDialogListener{
-        public void onNewUserContinue(DialogFragment Dialog);
+        void onNewUserContinue(DialogFragment Dialog);
     }
 
     private NewUserDialogListener mListener;

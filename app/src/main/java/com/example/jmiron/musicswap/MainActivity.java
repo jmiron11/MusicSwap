@@ -1,8 +1,9 @@
 package com.example.jmiron.musicswap;
 
 import android.app.Activity;
-import android.app.DialogFragment;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
@@ -12,15 +13,23 @@ import com.github.nkzawa.socketio.client.Socket;
 
 import java.net.URISyntaxException;
 
-public class MainActivity extends Activity implements NewUserDialogFragment.NewUserDialogListener {
+public class MainActivity extends FragmentActivity implements NewUserDialogFragment.NewUserDialogListener {
 
     public static Socket mSocket;
+    public static String username;
+
+    ViewPager mViewPager;
+    MainPagerAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
+//        mAdapter = new MainPagerAdapter(getSupportFragmentManager());
+//        mViewPager = (ViewPager)findViewById(R.id.mainPager);
+//        mViewPager.setAdapter(mAdapter);
 
         connectToServer();
 
@@ -29,14 +38,12 @@ public class MainActivity extends Activity implements NewUserDialogFragment.NewU
             Log.e("NOCONN", "Error connecting dayummm");
         }
 
-        if(savedInstanceState == null)
-        {
-            MainFragment mf = MainFragment.newInstance();
-            getFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.main_content_frame, mf)
-                    .commit();
-        }
+        mAdapter = new MainPagerAdapter(getSupportFragmentManager());
+        mViewPager = (ViewPager) findViewById(R.id.mainPager);
+        mViewPager.setAdapter(mAdapter);
+        mViewPager.setCurrentItem(1);
+
+
     }
 
     public static void connectToServer(){

@@ -4,13 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.support.v4.view.ViewPager;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,15 +21,20 @@ import android.widget.TextView;
  */
 public class MainFragment extends Fragment {
 
-    ViewPager mViewPager;
-
     SharedPreferences profile;
     SharedPreferences.Editor profileEditor;
 
-    private TextView username;
-    private TextView band1;
-    private TextView band2;
-    private TextView band3;
+    private ImageView song1Art;
+    private ImageView song2Art;
+    private ImageView song3Art;
+    private ImageView artistArt;
+    private TextView prevArtist;
+    private TextView song1;
+    private TextView song2;
+    private TextView song3;
+
+    private static String prevArtistName;
+    public void changePrevArtist(String newPrev ){ prevArtistName = newPrev; }
 
     /**
      * Use this factory method to create a new instance of
@@ -49,7 +52,6 @@ public class MainFragment extends Fragment {
     public MainFragment() {
         // Required empty public constructor
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,11 +67,17 @@ public class MainFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
-        /* initialize class varialbes */
-        username = (TextView) view.findViewById(R.id.UpperUsername);
-        band1 = (TextView) view.findViewById(R.id.mainBand1);
-        band2 = (TextView) view.findViewById(R.id.mainBand2);
-        band3 = (TextView) view.findViewById(R.id.mainBand3);
+        /* initialize class variables */
+        song1 = (TextView) view.findViewById(R.id.topSong1);
+        song2 = (TextView) view.findViewById(R.id.topSong2);
+        song3 = (TextView) view.findViewById(R.id.topSong3);
+
+        song1Art = (ImageView) view.findViewById(R.id.songArt1);
+        song2Art = (ImageView) view.findViewById(R.id.songArt2);
+        song3Art = (ImageView) view.findViewById(R.id.songArt3);
+
+        artistArt = (ImageView) view.findViewById(R.id.lastAlbumArt);
+        prevArtist = (TextView) view.findViewById(R.id.lastArtistName);
 
         profile = getActivity().getSharedPreferences("UserInfo", 0);
         profileEditor = profile.edit();
@@ -79,7 +87,7 @@ public class MainFragment extends Fragment {
         if(firstStart){
             if(getActivity() != null){
                 NewUserDialogFragment newUserDialog = new NewUserDialogFragment();
-                newUserDialog.show(getFragmentManager(), "New User");
+                newUserDialog.show(getActivity().getSupportFragmentManager(), "New User");
             }
         }
         else
@@ -89,7 +97,6 @@ public class MainFragment extends Fragment {
 
         Button chatBtn = (Button) view.findViewById(R.id.btnFindChat);
         Button suggestBtn = (Button) view.findViewById(R.id.btnSuggestArtist);
-        Button editProfileBtn = (Button) view.findViewById(R.id.btnEdit);
 
         chatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,20 +109,8 @@ public class MainFragment extends Fragment {
                         startActivity(intent);
                     } else {
                         NoConnectionDialogFragment noConnDialog = new NoConnectionDialogFragment();
-                        noConnDialog.show(getFragmentManager(), "No Connection");
+                        noConnDialog.show(getActivity().getSupportFragmentManager(), "No Connection");
                     }
-                }
-            }
-        });
-
-        editProfileBtn.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                if(getActivity() != null)
-                {
-                    Intent intent = new Intent(getActivity(), ProfileBuilderActivity.class);
-                    startActivity(intent);
                 }
             }
         });
@@ -128,20 +123,10 @@ public class MainFragment extends Fragment {
         });
 
         /* Set album art */
-        ImageView albumArt1 = (ImageView) view.findViewById(R.id.albumArt1);
-        ImageView albumArt2 = (ImageView) view.findViewById(R.id.albumArt2);
-        ImageView albumArt3 = (ImageView) view.findViewById(R.id.albumArt3);
-        albumArt1.setImageResource(R.drawable.albumartph40);
-        albumArt2.setImageResource(R.drawable.albumartph40);
-        albumArt3.setImageResource(R.drawable.albumartph40);
-
-        /* Set clickable linear layouts */
-        LinearLayout band1row = (LinearLayout) view.findViewById(R.id.band1row);
-        LinearLayout band2row = (LinearLayout) view.findViewById(R.id.band2row);
-        LinearLayout band3row = (LinearLayout) view.findViewById(R.id.band3row);
-        band1row.setOnClickListener(onArtistClick(band1));
-        band2row.setOnClickListener(onArtistClick(band2));
-        band3row.setOnClickListener(onArtistClick(band3));
+        song1Art.setImageResource(R.drawable.albumartph40);
+        song2Art.setImageResource(R.drawable.albumartph40);
+        song3Art.setImageResource(R.drawable.albumartph40);
+        artistArt.setImageResource(R.drawable.albumartph40);
 
     }
 
@@ -170,18 +155,19 @@ public class MainFragment extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                final String tempUsername = profile.getString("username", "No Profile");
-                final String tempBand1 = profile.getString("band1", "Band 1");
-                final String tempBand2 = profile.getString("band2", "Band 2");
-                final String tempBand3 = profile.getString("band3", "Band 3");
+                final String tempUsername = profile.getString("PrevArtist", "No Profile");
+                MainActivity.username = tempUsername;
+                final String prevsong1 = profile.getString("prevtopSong1", "Song 1");
+                final String prevsong2 = profile.getString("prevtopSong2", "Song 2");
+                final String prevsong3 = profile.getString("prevtopSong3", "Song 3");
 
                 getActivity().runOnUiThread(new Runnable(){
                         @Override
                         public void run(){
-                            username.setText(tempUsername);
-                            band1.setText(tempBand1);
-                            band2.setText(tempBand2);
-                            band3.setText(tempBand3);
+                            prevArtist.setText(tempUsername);
+                            song1.setText(prevsong1);
+                            song2.setText(prevsong2);
+                            song3.setText(prevsong3);
                         }
                     });
                 }

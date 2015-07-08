@@ -24,7 +24,7 @@
             android:label="@string/title_activity_chat" >
         </activity>
         <activity
-            android:name=".ProfileBuilderActivity"
+            android:name=".ProfileActivity"
             android:label="@string/title_activity_profile_builder" >
         </activity>
     </application>
