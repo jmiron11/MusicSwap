@@ -38,13 +38,23 @@
                 android:layout_gravity="left|center_horizontal"
                 android:layout_marginBottom="10dp" />
 
+
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="0dp"
+                android:id="@+id/line2" />
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:weightSum="1"
-                android:layout_marginBottom="10dp">
+                android:weightSum="1">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -53,7 +63,8 @@
                     android:id="@+id/lastAlbumArt"
                     android:layout_gravity="center"
                     android:minHeight="40px"
-                    android:minWidth="40px" />
+                    android:minWidth="40px"
+                    android:layout_margin="10dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -65,7 +76,9 @@
                     android:layout_marginLeft="10dp"
                     android:textColor="#FFFFFF"
                     android:textSize="20dp"
-                    android:gravity="left|center_vertical" />
+                    android:gravity="left|center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp" />
             </LinearLayout>
 
             <View
@@ -73,7 +86,8 @@
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray"
                 android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="0dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -101,7 +115,8 @@
                     android:id="@+id/songArt1"
                     android:layout_gravity="center"
                     android:minHeight="40px"
-                    android:minWidth="40px" />
+                    android:minWidth="40px"
+                    android:layout_margin="5dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -139,7 +154,8 @@
                     android:id="@+id/songArt2"
                     android:layout_gravity="center"
                     android:minHeight="40px"
-                    android:minWidth="40px" />
+                    android:minWidth="40px"
+                    android:layout_margin="5dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -179,7 +195,8 @@
                     android:id="@+id/songArt3"
                     android:layout_gravity="center"
                     android:minHeight="40px"
-                    android:minWidth="40px" />
+                    android:minWidth="40px"
+                    android:layout_margin="5dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
