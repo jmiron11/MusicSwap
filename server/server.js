@@ -48,7 +48,7 @@ io.sockets.on('connection', function (socket) {
         var band1 = profile.band1
         var band2 = profile.band2
         var band3 = profile.band3
-        mongoHandler.find_match(username, socket.id, band1, band2, band3)
+        mongoHandler.findMatch(username, socket.id, band1, band2, band3)
     })
 
     socket.on('disconnect', function(){
