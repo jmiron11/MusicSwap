@@ -15,35 +15,19 @@ import android.widget.TextView;
 import com.example.jmiron.musicswap.R;
 import com.example.jmiron.musicswap.activities.MainActivity;
 import com.example.jmiron.musicswap.activities.NewProfileActivity;
+import com.example.jmiron.musicswap.handlers.PreferencesHandler;
+import com.example.jmiron.musicswap.handlers.ServerHandler;
 import com.github.nkzawa.socketio.client.Socket;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 
-/**
- * A placeholder fragment containing a simple view.
- */
+
 public class ProfileFragment extends Fragment {
-    private SharedPreferences.Editor profileEditor;
-    private SharedPreferences profile;
+    private TextView username, artist1, artist2, artist3;
+    private ImageView albumArt1, albumArt2, albumArt3;
 
-    private TextView username;
-    private TextView artist1;
-    private TextView artist2;
-    private TextView artist3;
-    private ImageView albumArt1;
-    private ImageView albumArt2;
-    private ImageView albumArt3;
-
-    private Socket mSocket = MainActivity.mSocket;
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment MainFragment.
-     */
     public static ProfileFragment newInstance() {
         ProfileFragment fragment = new ProfileFragment();
         Bundle args = new Bundle();
@@ -57,11 +41,9 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        profile = getActivity().getSharedPreferences("UserInfo", 0);
-        profileEditor = profile.edit();
 
-        if (!MainActivity.mSocket.connected())
-            MainActivity.connectToServer();
+        if(!ServerHandler.isConnected())
+            ServerHandler.connectToServer();
     }
 
     @Override
@@ -133,39 +115,10 @@ public class ProfileFragment extends Fragment {
     }
 
     private void loadData() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                final String tempUsername = profile.getString("username", "No Profile");
-                final String tempBand1 = profile.getString("artist1", "Artist 1");
-                final String tempBand2 = profile.getString("artist2", "Artist 2");
-                final String tempBand3 = profile.getString("artist3", "Artist 3");
-
-                getActivity().runOnUiThread(new Runnable(){
-                    @Override
-                    public void run(){
-                        username.setText(tempUsername);
-                        artist1.setText(tempBand1);
-                        artist2.setText(tempBand2);
-                        artist3.setText(tempBand3);
-                    }
-                });
-            }
-        }).start();
-    }
-
-    private void saveData(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                profileEditor.putString("username", username.getText().toString().trim());
-                MainActivity.username = username.getText().toString().trim();
-                profileEditor.putString("artist1", artist1.getText().toString().trim());
-                profileEditor.putString("artist2", artist2.getText().toString().trim());
-                profileEditor.putString("artist3", artist3.getText().toString().trim());
-                profileEditor.commit();
-            }
-        }).start();
+        username.setText(PreferencesHandler.getUsername(getActivity()));
+        artist1.setText(PreferencesHandler.getArtist1(getActivity()));
+        artist2.setText(PreferencesHandler.getArtist2(getActivity()));
+        artist3.setText(PreferencesHandler.getArtist3(getActivity()));
     }
 
     private Button.OnClickListener onChangeUserClick() {

@@ -111,7 +111,7 @@ public class ChatFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
-        /* attatch class gui variables */
+        /* attach class gui variables */
         mInputText = (EditText) view.findViewById(R.id.chatMessage);
         mChatText = (ListView) view.findViewById(R.id.listView);
         mChatText.setAdapter(mMessageAdapter); // assign the adapter to the

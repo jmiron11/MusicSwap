@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.example.jmiron.musicswap.R;
 import com.example.jmiron.musicswap.activities.MainActivity;
+import com.example.jmiron.musicswap.handlers.PreferencesHandler;
 import com.example.jmiron.musicswap.interfaces.NewProfileFragmentInterface;
 
 
@@ -30,7 +31,6 @@ public class NewProfileUsernameFragment extends Fragment implements NewProfileFr
      *
      * @return A new instance of fragment NewProfileUsernameFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static NewProfileUsernameFragment newInstance() {
         NewProfileUsernameFragment fragment = new NewProfileUsernameFragment();
         Bundle args = new Bundle();
@@ -60,6 +60,8 @@ public class NewProfileUsernameFragment extends Fragment implements NewProfileFr
 
         ImageView someLogo = (ImageView) view.findViewById(R.id.logoImage);
         someLogo.setImageResource(R.drawable.squirrel);
+
+        usernameField.setText(PreferencesHandler.getUsername(getActivity()));
     }
 
     @Override
@@ -67,11 +69,7 @@ public class NewProfileUsernameFragment extends Fragment implements NewProfileFr
 
     @Override
     public void fragmentScrolled(){
-        SharedPreferences profile = getActivity().getSharedPreferences("UserInfo", 0);
-        SharedPreferences.Editor profileEditor = profileEditor = profile.edit();
-
-        profileEditor.putString("username", usernameField.getText().toString().trim());
-        profileEditor.commit();
+        PreferencesHandler.saveUserData(getActivity(), usernameField.getText().toString().trim());
     }
 
 }

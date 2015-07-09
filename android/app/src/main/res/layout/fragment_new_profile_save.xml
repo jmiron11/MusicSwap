@@ -7,9 +7,6 @@
     android:background="@color/material_teal_300"
     android:id="@+id/frag_new_profile_save_layout">
 
-    <!-- TODO: Update blank fragment layout -->
-
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"

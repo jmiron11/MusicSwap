@@ -4,19 +4,17 @@ package com.example.jmiron.musicswap.fragments;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.jmiron.musicswap.R;
 import com.example.jmiron.musicswap.activities.MainActivity;
-import com.example.jmiron.musicswap.adapters.MainPagerAdapter;
+import com.example.jmiron.musicswap.handlers.ServerHandler;
 import com.example.jmiron.musicswap.interfaces.NewProfileFragmentInterface;
+import com.example.jmiron.musicswap.handlers.PreferencesHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,7 +36,6 @@ public class NewProfileSaveFragment extends Fragment implements NewProfileFragme
      *
      * @return A new instance of fragment NewProfileSaveFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static NewProfileSaveFragment newInstance(String param1, String param2) {
         NewProfileSaveFragment fragment = new NewProfileSaveFragment();
         Bundle args = new Bundle();
@@ -83,35 +80,21 @@ public class NewProfileSaveFragment extends Fragment implements NewProfileFragme
     @Override
     public void onResume(){
         super.onResume();
-        loadData();
     }
 
     private Button.OnClickListener onSaveClick(){
         Button.OnClickListener ret = new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                if (!MainActivity.mSocket.connected())
-                    MainActivity.connectToServer();
-                saveData();
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        saveData();
-                        JSONObject new_profile = new JSONObject();
-                        try {
-                            new_profile.put("username", username.getText());
-                            new_profile.put("artist1", artist1.getText());
-                            new_profile.put("artist2", artist2.getText());
-                            new_profile.put("artist3", artist3.getText());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        if (!MainActivity.mSocket.connected()) {
-                            MainActivity.connectToServer();
-                        }
-                        MainActivity.mSocket.emit("new_profile", new_profile);
-                    }
-                }).start();
+                if(!ServerHandler.isConnected())
+                    ServerHandler.connectToServer();
+
+                String saveUsername = username.getText().toString().trim();
+                String saveArtist1 = artist1.getText().toString().trim();
+                String saveArtist2 = artist2.getText().toString().trim();
+                String saveArtist3 = artist3.getText().toString().trim();
+                PreferencesHandler.saveUserData(getActivity(), saveUsername, saveArtist1, saveArtist2, saveArtist3);
+                ServerHandler.saveProfile(saveUsername, saveArtist1, saveArtist2, saveArtist3);
                 getActivity().finish();
             }
         };
@@ -120,35 +103,10 @@ public class NewProfileSaveFragment extends Fragment implements NewProfileFragme
     }
 
     private void loadData(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                final String tempUsername = profile.getString("username", "No Profile");
-                final String tempBand1 = profile.getString("artist1", "Artist 1");
-                final String tempBand2 = profile.getString("artist2", "Artist 2");
-                final String tempBand3 = profile.getString("artist3", "Artist 3");
-
-                getActivity().runOnUiThread(new Runnable(){
-                    @Override
-                    public void run(){
-                        username.setText(tempUsername);
-                        artist1.setText(tempBand1);
-                        artist2.setText(tempBand2);
-                        artist3.setText(tempBand3);
-                    }
-                });
-            }
-        }).start();
-    }
-
-    private void saveData(){
-        profileEditor.putString("username", username.getText().toString().trim());
-        MainActivity.username = username.getText().toString().trim();
-        profileEditor.putString("artist1", artist1.getText().toString().trim());
-        profileEditor.putString("artist2", artist2.getText().toString().trim());
-        profileEditor.putString("artist3", artist3.getText().toString().trim());
-        profileEditor.putBoolean("prevProfile", true);
-        profileEditor.commit();
+        username.setText(PreferencesHandler.getUsername(getActivity()));
+        artist1.setText(PreferencesHandler.getArtist1(getActivity()));
+        artist2.setText(PreferencesHandler.getArtist2(getActivity()));
+        artist3.setText(PreferencesHandler.getArtist3(getActivity()));
     }
 
     @Override

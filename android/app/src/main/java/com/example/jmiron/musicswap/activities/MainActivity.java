@@ -3,6 +3,7 @@ package com.example.jmiron.musicswap.activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -13,6 +14,7 @@ import android.view.WindowManager;
 import com.example.jmiron.musicswap.adapters.MainPagerAdapter;
 import com.example.jmiron.musicswap.adapters.NewProfilePagerAdapter;
 import com.example.jmiron.musicswap.R;
+import com.example.jmiron.musicswap.handlers.ServerHandler;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        connectToServer();
+        ServerHandler.connectToServer();
 
         /* Set up horizontal paging (swipe) */
 
@@ -47,32 +49,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static void connectToServer(){
-        try {
-            mSocket = IO.socket("http://10.0.2.2:8080"); // initialize the io.socket websocket
-        } catch (URISyntaxException e) {
-            Log.e("IDK", "Error creating socket");
-        }
-        mSocket.connect();
-    }
-
     @Override
     protected void onDestroy(){
         super.onDestroy();
 
-        /* disconnect the websocket */
-        try {
-            mSocket.close();
-            mSocket.disconnect();
-        } catch (Exception e){
-            Log.e("IDK","Error closing socket");
-        }
+        ServerHandler.closeConnection();
     }
 
     private boolean prevProfileExists() {
         SharedPreferences profile = this.getSharedPreferences("UserInfo", 0);
         return profile.getBoolean("prevProfile", false);
     }
-
 
 }

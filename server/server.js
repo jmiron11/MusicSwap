@@ -36,19 +36,19 @@ io.sockets.on('connection', function (socket) {
     socket.on('new_profile', function(profile){
     	console.log("Received profile")
     	var username = profile.username
-    	var band1 = profile.band1
-    	var band2 = profile.band2
-    	var band3 = profile.band3
+    	var artist1 = profile.artist1
+    	var artist2 = profile.artist2
+    	var artist3 = profile.artist3
 
-    	mongoHandler.modifyProfile(username, band1, band2, band3)
+    	mongoHandler.modifyProfile(username, artist1, artist2, artist3)
     })
 
     socket.on('find_match', function(profile){
         var username = profile.username
-        var band1 = profile.band1
-        var band2 = profile.band2
-        var band3 = profile.band3
-        mongoHandler.findMatch(username, socket.id, band1, band2, band3)
+        var artist1 = profile.artist1
+        var artist2 = profile.artist2
+        var artist3 = profile.artist3
+        mongoHandler.findMatch(username, socket.id, artist1, artist2, artist3)
     })
 
     socket.on('disconnect', function(){

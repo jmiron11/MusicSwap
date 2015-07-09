@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.example.jmiron.musicswap.R;
 import com.example.jmiron.musicswap.interfaces.NewProfileFragmentInterface;
+import com.example.jmiron.musicswap.handlers.PreferencesHandler;
 
 
 /**
@@ -30,7 +31,6 @@ public class NewProfileArtistsFragment extends Fragment implements NewProfileFra
      *
      * @return A new instance of fragment NewProfileArtistsFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static NewProfileArtistsFragment newInstance() {
         NewProfileArtistsFragment fragment = new NewProfileArtistsFragment();
         Bundle args = new Bundle();
@@ -60,6 +60,10 @@ public class NewProfileArtistsFragment extends Fragment implements NewProfileFra
         artistName1 = (EditText) view.findViewById(R.id.artist1Field);
         artistName2 = (EditText) view.findViewById(R.id.artist2Field);
         artistName3 = (EditText) view.findViewById(R.id.artist3Field);
+
+        artistName1.setText(PreferencesHandler.getArtist1(getActivity()));
+        artistName2.setText(PreferencesHandler.getArtist2(getActivity()));
+        artistName3.setText(PreferencesHandler.getArtist3(getActivity()));
     }
 
     @Override
@@ -68,17 +72,10 @@ public class NewProfileArtistsFragment extends Fragment implements NewProfileFra
 
     @Override
     public void fragmentScrolled(){
-        SharedPreferences profile = getActivity().getSharedPreferences("UserInfo", 0);
-        SharedPreferences.Editor profileEditor = profileEditor = profile.edit();
-
-        profileEditor.putString("artist1", artistName1.getText().toString().trim());
-        profileEditor.putString("artist2", artistName2.getText().toString().trim());
-        profileEditor.putString("artist3", artistName3.getText().toString().trim());
-        profileEditor.commit();
+        String artist1 =  artistName1.getText().toString().trim();
+        String artist2 =  artistName2.getText().toString().trim();
+        String artist3 =  artistName3.getText().toString().trim();
+        PreferencesHandler.saveUserData(getActivity(), artist1, artist2, artist3);
     }
 }
 
-
-//TODO: Add a shared preferences handler
-//TODO: Load in the previous profile artists on edit profile when a profile exits
-//TODO: check for profile -> if exists load in data, ezzzzz

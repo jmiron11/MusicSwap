@@ -2,25 +2,28 @@ package com.example.jmiron.musicswap.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.ListView;
 
+import com.example.jmiron.musicswap.adapters.MessageAdapter;
+import com.example.jmiron.musicswap.data.MessageContainer;
 import com.example.jmiron.musicswap.dialogs.NoConnectionDialogFragment;
 import com.example.jmiron.musicswap.R;
 import com.example.jmiron.musicswap.activities.ChatActivity;
 import com.example.jmiron.musicswap.activities.MainActivity;
+import com.example.jmiron.musicswap.handlers.PreferencesHandler;
+import com.example.jmiron.musicswap.handlers.ServerHandler;
 import com.github.nkzawa.socketio.client.Socket;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 
 /**
@@ -28,24 +31,13 @@ import org.json.JSONObject;
  * Use the {@link MainFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment {;
 
     private Socket mSocket;
 
-    private SharedPreferences profile;
-    private SharedPreferences.Editor profileEditor;
-
-    private ImageView song1Art;
-    private ImageView song2Art;
-    private ImageView song3Art;
-    private ImageView artistArt;
-    private TextView prevArtist;
-    private TextView song1;
-    private TextView song2;
-    private TextView song3;
-
-    private static String prevArtistName;
-    public void changePrevArtist(String newPrev ){ prevArtistName = newPrev; }
+    private ArrayList<MessageContainer> mMessageArray;
+    private MessageAdapter mMessageAdapter;
+    private ListView mMessageView;
 
     /**
      * Use this factory method to create a new instance of
@@ -66,6 +58,7 @@ public class MainFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -78,13 +71,14 @@ public class MainFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
-        mSocket = MainActivity.mSocket;
+        mMessageView = (ListView) view.findViewById(R.id.mainList);
+        mMessageView.setAdapter(mMessageAdapter); // assign the adapter to the infoview
 
-
-        /* initialize user preferences from local data */
-        profile = getActivity().getSharedPreferences("UserInfo", 0);
-        profileEditor = profile.edit();
-
+        if(PreferencesHandler.getFirst(getActivity()))
+        {
+            addInfo(new MessageContainer("Welcome", "THIS IS A MESSAGE", R.drawable.albumartph40, 0));
+            PreferencesHandler.setFirstFalse(getActivity());
+        }
 
         /* assign button on click listeners */
         Button chatBtn = (Button) view.findViewById(R.id.btnFindChat);
@@ -93,28 +87,41 @@ public class MainFragment extends Fragment {
         Button swapBtn = (Button) view.findViewById(R.id.btnSuggestArtist);
         swapBtn.setOnClickListener(onSwapClick());
 
-
-        /* Set album art */
-//        song1Art.setImageResource(R.drawable.albumartph40);
-//        song2Art.setImageResource(R.drawable.albumartph40);
-//        song3Art.setImageResource(R.drawable.albumartph40);
-//        artistArt.setImageResource(R.drawable.albumartph40);
-
+        /* restoring the info view */
+//        if(savedInstanceState != null){
+//            /* copy old info array data to the new emptied info array */
+//            ArrayList<MessageContainer> prevData = savedInstanceState.getParcelableArrayList("info");
+//            for (MessageContainer data : prevData){
+//                addInfo(data);
+//            }
+//        }
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        mMessageArray = new ArrayList<>();
+        mMessageAdapter = new MessageAdapter(getActivity(), mMessageArray);
+
+        ArrayList<MessageContainer> prevMessages = PreferencesHandler.getMessages(getActivity());
+        if(prevMessages != null)
+        {
+            for (MessageContainer message : prevMessages){
+                addInfo(message);
+            }
+        }
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+//        outState.putParcelableArrayList("info", mMessageArray);
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
+        PreferencesHandler.storeMessages(getActivity(), mMessageArray);
     }
 
     @Override
@@ -122,22 +129,34 @@ public class MainFragment extends Fragment {
         super.onResume();
     }
 
+    public void onDestroy(){
+        super.onDestroy();
+    }
+
+    private void addInfo(MessageContainer newInfo)
+    {
+        mMessageArray.add(0, newInfo);
+    }
 
     private Button.OnClickListener onChatClick(){
         Button.OnClickListener ret = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (getActivity() != null) {
-                    if (MainActivity.mSocket.connected()) {
-                        //TODO: Add username to joining chat
-                        MainActivity.mSocket.emit("chat_user_join");
-                        Intent intent = new Intent(getActivity(), ChatActivity.class);
-                        startActivity(intent);
-                    } else {
-                        NoConnectionDialogFragment noConnDialog = new NoConnectionDialogFragment();
-                        noConnDialog.show(getActivity().getSupportFragmentManager(), "No Connection");
-                    }
+                if (!ServerHandler.isConnected()) {
+                    NoConnectionDialogFragment noConnDialog = new NoConnectionDialogFragment();
+                    noConnDialog.show(getActivity().getSupportFragmentManager(), "No Connection");
                 }
+//                if (getActivity() != null) {
+//                    if (MainActivity.mSocket.connected()) {
+//                        //TODO: Add username to joining chat
+//                        MainActivity.mSocket.emit("chat_user_join");
+//                        Intent intent = new Intent(getActivity(), ChatActivity.class);
+//                        startActivity(intent);
+//                    } else {
+//                        NoConnectionDialogFragment noConnDialog = new NoConnectionDialogFragment();
+//                        noConnDialog.show(getActivity().getSupportFragmentManager(), "No Connection");
+//                    }
+//                }
             }
         };
         return ret;
@@ -147,29 +166,15 @@ public class MainFragment extends Fragment {
         Button.OnClickListener ret = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mSocket.connected())
-                {
-                    final String username = profile.getString("username", "No Profile");
-                    final String artist1 = profile.getString("artist1", "Artist 1");
-                    final String artist2 = profile.getString("artist2", "Artist 2");
-                    final String artist3 = profile.getString("artist3", "Artist 3");
-                    JSONObject new_profile = new JSONObject();
-                    try {
-                        new_profile.put("username", username);
-                        new_profile.put("artist1", artist1);
-                        new_profile.put("artist2", artist2);
-                        new_profile.put("artist3", artist3);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    mSocket.emit("find_match", new_profile);
-                }
-                else
-                {
+                if (!ServerHandler.isConnected()) {
                     NoConnectionDialogFragment noConnDialog = new NoConnectionDialogFragment();
                     noConnDialog.show(getActivity().getSupportFragmentManager(), "No Connection");
                 }
-
+                final String username = PreferencesHandler.getUsername(getActivity());
+                final String artist1 = PreferencesHandler.getArtist1(getActivity());
+                final String artist2 = PreferencesHandler.getArtist2(getActivity());
+                final String artist3 = PreferencesHandler.getArtist3(getActivity());
+                ServerHandler.findMatch(username, artist1, artist2, artist3);
             }
         };
         return ret;

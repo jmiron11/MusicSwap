@@ -43,18 +43,18 @@
     <color name="hint_foreground_material_dark">#80ffffff</color>
     <color name="hint_foreground_material_light">#80000000</color>
 
-    <color name="highlighted_text_material_dark">#6640c4ff</color> <!-- TODO: This is 40% alpha on the default accent color. -->
-    <color name="highlighted_text_material_light">#6640c4ff</color> <!-- TODO: This is 40% alpha on the default accent color. -->
+    <color name="highlighted_text_material_dark">#6640c4ff</color>
+    <color name="highlighted_text_material_light">#6640c4ff</color>
 
     <!-- Text & foreground colors -->
 
     <color name="primary_text_default_material_light">#de000000</color> <!-- Black 87% -->
     <color name="secondary_text_material_light">#8a000000</color> <!-- Black 54% -->
-    <color name="tertiary_text_material_light">#8a000000</color> <!-- Black 54% (TODO: same as secondary?) -->
+    <color name="tertiary_text_material_light">#8a000000</color> <!-- Black 54%  -->
 
     <color name="primary_text_default_material_dark">#deffffff</color> <!-- White 87% -->
     <color name="secondary_text_material_dark">#61ffffff</color> <!-- White 38% -->
-    <color name="tertiary_text_material_dark">#61ffffff</color> <!-- White 38% (TODO: same as secondary?) -->
+    <color name="tertiary_text_material_dark">#61ffffff</color> <!-- White 38%  -->
 
     <!-- Primary & accent colors -->
 

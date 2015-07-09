@@ -6,8 +6,6 @@
     android:orientation="vertical"
     android:background="@color/material_teal_300">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,6 +18,10 @@
         android:scaleType="fitCenter"
         android:layout_weight="0.8"
         android:padding="15dp" />
+
+    <LinearLayout
+        android:focusable="true" android:focusableInTouchMode="true"
+        android:layout_width="0px" android:layout_height="0px"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -37,5 +39,7 @@
         android:backgroundTint="#cbffffff"
         android:textSize="30dp"
         android:hint="Username"
-        android:textColorHint="#c7ffffff" />
+        android:textColorHint="#c7ffffff"
+        android:nextFocusUp="@id/usernameField"
+        android:nextFocusLeft="@id/usernameField"/>
 </LinearLayout>

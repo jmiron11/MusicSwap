@@ -10,6 +10,7 @@ import android.support.v4.app.DialogFragment;
 import com.example.jmiron.musicswap.R;
 import com.example.jmiron.musicswap.activities.ChatActivity;
 import com.example.jmiron.musicswap.activities.MainActivity;
+import com.example.jmiron.musicswap.handlers.ServerHandler;
 
 /**
  * Created by jmiron on 7/3/2015.
@@ -21,7 +22,7 @@ public class NoConnectionDialogFragment extends DialogFragment {
         builder.setMessage(R.string.no_connection)
                 .setPositiveButton(R.string.try_connect, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        MainActivity.connectToServer();
+                        ServerHandler.connectToServer();
                         if(MainActivity.mSocket.connected()){
                             Intent intent = new Intent(getActivity(), ChatActivity.class);
                             startActivity(intent);
@@ -31,7 +32,7 @@ public class NoConnectionDialogFragment extends DialogFragment {
                 .setNegativeButton(R.string.back, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User cancelled the dialog
-                        MainActivity.connectToServer();
+                        ServerHandler.connectToServer();
                     }
                 });
         // Create the AlertDialog object and return it
