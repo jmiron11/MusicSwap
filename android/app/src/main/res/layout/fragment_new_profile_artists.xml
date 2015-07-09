@@ -4,9 +4,7 @@
     tools:context="com.example.jmiron.musicswap.fragments.NewProfileArtistsFragment"
     android:orientation="vertical"
     android:background="@color/material_teal_300"
-    android:id="@+id/">
-
-    <!-- TODO: Update blank fragment layout -->
+    android:id="@+id/frag_new_profile_artist_layout">
 
     <TextView
         android:layout_width="wrap_content"
@@ -22,118 +20,128 @@
         android:textStyle="bold"
         android:textSize="30dp" />
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/material_teal_300"
-        android:layout_below="@+id/choose_favorite_artists"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="0dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/newProfileArtistArt1"
-            android:minHeight="80dp"
-            android:minWidth="80dp"
-            android:layout_margin="10dp"
-            android:layout_gravity="center"
-            android:background="@color/material_teal_500" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textPersonName"
-            android:text="Artist 1"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:ems="10"
-            android:id="@+id/artist1Field"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:textColor="#FFFFFF"
-            android:textAlignment="center"
-            android:gravity="fill_vertical|center_horizontal" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/material_teal_300"
-        android:layout_below="@+id/linearLayout"
+        android:id="@+id/scrollView2"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/linearLayout2"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="0dp">
+        android:layout_alignParentStart="true">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/newProfileArtistArt2"
-            android:minHeight="80dp"
-            android:minWidth="80dp"
-            android:layout_margin="10dp"
-            android:layout_gravity="center"
-            android:background="@color/material_teal_500" />
-
-        <EditText
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/artist2Field"
-            android:text="Artist 2"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:textColor="#FFFFFF"
-            android:textAlignment="center"
-            android:gravity="fill_vertical|center_horizontal" />
-    </LinearLayout>
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/choose_favorite_artists">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/material_teal_300"
-        android:layout_below="@+id/linearLayout2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="0dp"
-        android:layout_marginTop="0dp">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/material_teal_300"
+                android:id="@+id/linearLayout"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/newProfileArtistArt3"
-            android:minHeight="80dp"
-            android:minWidth="80dp"
-            android:layout_margin="10dp"
-            android:layout_gravity="center"
-            android:background="@color/material_teal_500" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/newProfileArtistArt1"
+                    android:minHeight="80dp"
+                    android:minWidth="80dp"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    android:background="@color/material_teal_500" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/artist3Field"
-            android:text="Artist 3"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:textColor="#FFFFFF"
-            android:textAlignment="center"
-            android:gravity="fill_vertical|center_horizontal" />
-    </LinearLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:ems="10"
+                    android:id="@+id/artist1Field"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:textAlignment="center"
+                    android:gravity="fill_vertical|center_horizontal"
+                    android:hint="Artist 1"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/material_teal_300"
+                android:id="@+id/linearLayout2"
+                android:layout_below="@+id/linearLayout"
+                android:layout_centerHorizontal="true">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/newProfileArtistArt2"
+                    android:minHeight="80dp"
+                    android:minWidth="80dp"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    android:background="@color/material_teal_500" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/artist2Field"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:textColor="#FFFFFF"
+                    android:textAlignment="center"
+                    android:gravity="fill_vertical|center_horizontal"
+                    android:textColorHint="#FFFFFF"
+                    android:hint="Artist 2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/material_teal_300"
+                android:layout_below="@+id/linearLayout2"
+                android:layout_alignLeft="@+id/linearLayout2"
+                android:layout_alignStart="@+id/linearLayout2">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/newProfileArtistArt3"
+                    android:minHeight="80dp"
+                    android:minWidth="80dp"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    android:background="@color/material_teal_500" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/artist3Field"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:textColor="#FFFFFF"
+                    android:textAlignment="center"
+                    android:gravity="fill_vertical|center_horizontal"
+                    android:textColorHint="#FFFFFF"
+                    android:hint="Artist 3" />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

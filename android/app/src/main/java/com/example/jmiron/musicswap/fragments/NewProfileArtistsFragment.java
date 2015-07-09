@@ -77,3 +77,8 @@ public class NewProfileArtistsFragment extends Fragment implements NewProfileFra
         profileEditor.commit();
     }
 }
+
+
+//TODO: Add a shared preferences handler
+//TODO: Load in the previous profile artists on edit profile when a profile exits
+//TODO: check for profile -> if exists load in data, ezzzzz

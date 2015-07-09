@@ -3,7 +3,9 @@
     android:layout_height="match_parent"
     tools:context="com.example.jmiron.musicswap.fragments.NewProfileSaveFragment"
     android:orientation="vertical"
-    android:transitionGroup="false">
+    android:transitionGroup="false"
+    android:background="@color/material_teal_300"
+    android:id="@+id/frag_new_profile_save_layout">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -13,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/layout_new_profile_shower"
-        android:background="#FFFFFF"
+        android:background="@color/material_teal_300"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -39,7 +41,7 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray"
+            android:background="#ffffffff"
             android:layout_alignBottom="@+id/line4"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="3dp"
@@ -59,7 +61,8 @@
                 android:minHeight="40dp"
                 android:minWidth="40dp"
                 android:layout_gravity="center"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:background="@color/material_teal_500" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -73,13 +76,14 @@
                 android:textSize="20dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginBottom="0dp"
-                android:gravity="left|center" />
+                android:gravity="left|center"
+                android:textColor="#c9ffffff" />
         </LinearLayout>
 
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray"
+            android:background="#ffffffff"
             android:layout_alignBottom="@+id/line5"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="3dp"
@@ -101,7 +105,8 @@
                 android:minHeight="40dp"
                 android:minWidth="40dp"
                 android:layout_gravity="center"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:background="@color/material_teal_500" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -116,13 +121,14 @@
                 android:textSize="20dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginBottom="0dp"
-                android:gravity="left|center" />
+                android:gravity="left|center"
+                android:textColor="#c9ffffff" />
         </LinearLayout>
 
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray"
+            android:background="#ffffffff"
             android:layout_alignBottom="@+id/line6"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="3dp"
@@ -143,7 +149,8 @@
                 android:minHeight="40dp"
                 android:minWidth="40dp"
                 android:layout_gravity="center"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:background="@color/material_teal_500" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -158,7 +165,8 @@
                 android:textSize="20dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginBottom="0dp"
-                android:gravity="left|center" />
+                android:gravity="left|center"
+                android:textColor="#c9ffffff" />
         </LinearLayout>
 
 
@@ -173,6 +181,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:minHeight="60dp"
-        android:layout_margin="5dp" />
+        android:layout_margin="5dp"
+        android:background="@color/material_teal_100" />
 
 </RelativeLayout>
