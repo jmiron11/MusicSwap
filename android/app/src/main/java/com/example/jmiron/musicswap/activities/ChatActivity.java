@@ -2,6 +2,7 @@ package com.example.jmiron.musicswap.activities;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -11,7 +12,7 @@ import com.example.jmiron.musicswap.fragments.ChatFragment;
 import com.example.jmiron.musicswap.R;
 
 
-public class ChatActivity extends FragmentActivity {
+public class ChatActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -90,6 +90,8 @@ public class NewProfileSaveFragment extends Fragment implements NewProfileFragme
         Button.OnClickListener ret = new View.OnClickListener() {
             @Override
             public void onClick(View view){
+                if (!MainActivity.mSocket.connected())
+                    MainActivity.connectToServer();
                 saveData();
                 new Thread(new Runnable() {
                     @Override

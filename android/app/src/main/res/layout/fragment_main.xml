@@ -1,266 +1,81 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" tools:context="com.example.jmiron.musicswap.fragments.MainFragment"
     android:orientation="vertical"
     android:id="@+id/fragment_main"
-    android:weightSum="1"
-    android:background="#C9BEB0">
+    android:weightSum="0">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.8"
         android:weightSum = "0.9"
         android:padding="10dp"
         android:id="@+id/background_layout"
-        android:background="#303030">
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:layout_above="@+id/ButtonGrouplayout">
 
 
-        <LinearLayout
-            android:orientation="vertical"
+        <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:background="@drawable/profile_background"
-            android:weightSum="1.2"
-            android:id="@+id/profile_background_layout">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Last Recommended Artist"
-                android:id="@+id/lastArtist"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:textColor="#d6ffffff"
-                android:layout_gravity="left|center_horizontal"
-                android:layout_marginBottom="10dp" />
-
-
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="0dp"
-                android:id="@+id/line2" />
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:weightSum="1">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.3"
-                    android:id="@+id/lastAlbumArt"
-                    android:layout_gravity="center"
-                    android:minHeight="40px"
-                    android:minWidth="40px"
-                    android:layout_margin="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.7"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Artist Name"
-                    android:id="@+id/lastArtistName"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20dp"
-                    android:gravity="left|center_vertical"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp" />
-            </LinearLayout>
-
-            <View
-                    android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="0dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Top Tracks"
-                android:id="@+id/textView"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
-                android:textColor="#FFFFFF"
-                android:textSize="20dp" />
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="1"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.3"
-                    android:id="@+id/songArt1"
-                    android:layout_gravity="center"
-                    android:minHeight="40px"
-                    android:minWidth="40px"
-                    android:layout_margin="5dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.7"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Song 1"
-                    android:id="@+id/topSong1"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18dp"
-                    android:layout_gravity="left|center_vertical"
-                    android:gravity="left|center" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="30dp" />
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="1"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.3"
-                    android:id="@+id/songArt2"
-                    android:layout_gravity="center"
-                    android:minHeight="40px"
-                    android:minWidth="40px"
-                    android:layout_margin="5dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.7"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Song 2"
-                    android:id="@+id/topSong2"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18dp"
-                    android:layout_gravity="left|center_vertical"
-                    android:gravity="left|center" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="30dp"
-                android:orientation="vertical"
-                android:id="@+id/line1" />
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="1"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.3"
-                    android:id="@+id/songArt3"
-                    android:layout_gravity="center"
-                    android:minHeight="40px"
-                    android:minWidth="40px"
-                    android:layout_margin="5dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.7"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Song 3"
-                    android:id="@+id/topSong3"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18dp"
-                    android:layout_gravity="left|center_vertical"
-                    android:gravity="left|center" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="30dp" />
-        </LinearLayout>
-
-
+            android:id="@+id/listView2" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="1"
-        android:layout_weight="0.2"
-        android:background="#303030">
+        android:layout_weight="0"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:orientation="vertical"
+        android:id="@+id/ButtonGrouplayout"
+        android:weightSum="1.2">
 
         <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:text="Chat Test"
-            android:id="@+id/btnFindChat"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_toStartOf="@+id/btnSuggestArtist"
-            android:layout_toLeftOf="@+id/btnSuggestArtist"
-            android:padding="0dp"
-            android:background="@drawable/mainbutton"
-            android:layout_margin="4dp"
-            android:textColor="#b3ffffff" />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Music Swap"
             android:id="@+id/btnSuggestArtist"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
             android:padding="0dp"
-            android:background="@drawable/mainbutton"
-            android:layout_margin="4dp"
-            android:textColor="#b4ffffff" />
+            android:textColor="@color/secondary_text_material_light"
+            android:background="#ffffffff"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_weight="0.3"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:minHeight="60dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="15dp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chat Test"
+            android:id="@+id/btnFindChat"
+            android:padding="0dp"
+            android:textColor="@color/secondary_text_material_light"
+            android:background="#ffffffff"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_weight="0.3"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/btnSuggestArtist"
+            android:layout_toEndOf="@+id/btnSuggestArtist"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:minHeight="60dp"
+            android:layout_marginBottom="10dp" />
+
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

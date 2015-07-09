@@ -26,10 +26,6 @@ public class NoConnectionDialogFragment extends DialogFragment {
                             Intent intent = new Intent(getActivity(), ChatActivity.class);
                             startActivity(intent);
                         }
-                        else{
-                            FailedToConectDialogFragment failedFrag = new FailedToConectDialogFragment();
-                            failedFrag.show(getActivity().getSupportFragmentManager(), "noConnDialog");
-                        }
                     }
                 })
                 .setNegativeButton(R.string.back, new DialogInterface.OnClickListener() {

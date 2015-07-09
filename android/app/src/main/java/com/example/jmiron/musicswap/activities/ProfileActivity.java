@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
@@ -13,14 +14,12 @@ import com.example.jmiron.musicswap.fragments.ProfileFragment;
 import com.example.jmiron.musicswap.R;
 
 
-public class ProfileActivity extends FragmentActivity{
+public class ProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         if(savedInstanceState == null)
         {

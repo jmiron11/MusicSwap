@@ -63,7 +63,7 @@ public class NewProfileUsernameFragment extends Fragment implements NewProfileFr
     }
 
     @Override
-    public void fragmentBecameVisible() { }
+    public void fragmentBecameVisible() {   }
 
     @Override
     public void fragmentScrolled(){

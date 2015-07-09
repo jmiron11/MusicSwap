@@ -59,6 +59,9 @@ public class ProfileFragment extends Fragment {
         super.onCreate(savedInstanceState);
         profile = getActivity().getSharedPreferences("UserInfo", 0);
         profileEditor = profile.edit();
+
+        if (!MainActivity.mSocket.connected())
+            MainActivity.connectToServer();
     }
 
     @Override
@@ -93,9 +96,6 @@ public class ProfileFragment extends Fragment {
         /* set button OnClickListeners */
         Button changeUsernameBtn = (Button) v.findViewById(R.id.btnChangeUsername);
         changeUsernameBtn.setOnClickListener(onChangeUserClick());
-
-        Button saveBtn = (Button) v.findViewById(R.id.btnSave);
-        saveBtn.setOnClickListener(onSaveClick());
 
         Button resetProfileBtn = (Button) v.findViewById(R.id.profileReset);
         resetProfileBtn.setOnClickListener(onResetProfileClick());
@@ -169,34 +169,6 @@ public class ProfileFragment extends Fragment {
                 if (getActivity() != null) {
                     //TODO: Implement change username
                 }
-            }
-        };
-        return ret;
-    }
-
-    private Button.OnClickListener onSaveClick(){
-        Button.OnClickListener ret = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        saveData();
-                        JSONObject new_profile = new JSONObject();
-                        try {
-                            new_profile.put("username", username.getText());
-                            new_profile.put("artist1", artist1.getText());
-                            new_profile.put("artist2", artist2.getText());
-                            new_profile.put("artist3", artist3.getText());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        if (!mSocket.connected()) {
-                            MainActivity.connectToServer();
-                        }
-                        mSocket.emit("new_profile", new_profile);
-                    }
-                }).start();
             }
         };
         return ret;

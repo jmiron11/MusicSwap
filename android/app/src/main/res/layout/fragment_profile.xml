@@ -1,10 +1,9 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.jmiron.musicswap.fragments.ProfileFragment"
     android:id="@+id/fragment_profile_builder"
     android:orientation="vertical"
-    android:background="#303030"
     android:padding="16dp"
     android:weightSum="1">
 
@@ -17,18 +16,19 @@
         android:layout_gravity="center_horizontal"
         android:layout_weight="0"
         android:gravity="left|center"
-        android:textColor="#FFFFFF"
-        android:layout_marginBottom="0dp" />
+        android:textColor="@color/primary_text_default_material_light"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray"
-        android:layout_alignBottom="@+id/username"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="3dp"
-        android:layout_marginBottom="10dp" />
+        android:id="@+id/view"
+        android:layout_below="@+id/username"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -38,151 +38,164 @@
         android:layout_alignParentStart="true"
         android:layout_above="@+id/btnSave"
         android:fillViewport="false"
-        android:layout_below="@+id/username">
+        android:layout_below="@+id/username"
+        android:layout_marginLeft="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="169dp">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/layout_"
-            android:background="#303030">
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#424242"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/albumArt1"
-                    android:minHeight="40dp"
-                    android:minWidth="40dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="textPersonName"
-                    android:text="Band 1"
-                    android:id="@+id/editBand1"
-                    android:layout_weight="0"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:textColor="#FFFFFF"
-                    android:clickable="true"
-                    android:textSize="20dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginBottom="0dp"
-                    android:gravity="left|center" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#424242"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/albumArt2"
-                    android:minHeight="40dp"
-                    android:minWidth="40dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="textPersonName"
-                    android:text="Band 2"
-                    android:ems="10"
-                    android:id="@+id/editBand2"
-                    android:layout_weight="0"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:textColor="#FFFFFF"
-                    android:clickable="true"
-                    android:textSize="20dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginBottom="0dp"
-                    android:gravity="left|center" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#424242"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/albumArt3"
-                    android:minHeight="40dp"
-                    android:minWidth="40dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="textPersonName"
-                    android:text="Band 3"
-                    android:ems="10"
-                    android:id="@+id/editBand3"
-                    android:layout_weight="0"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:textColor="#FFFFFF"
-                    android:clickable="true"
-                    android:textSize="20dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginBottom="0dp"
-                    android:gravity="left|center" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="66dp">
-
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:text="Change\nUsername"
-                    android:id="@+id/btnChangeUsername"
-                    android:nestedScrollingEnabled="false"
-                    android:layout_weight="0.5" />
-
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:text="Reset\nProfile"
-                    android:id="@+id/profileReset"
-                    android:layout_weight="0.5" />
-            </LinearLayout>
-
-        </LinearLayout>
     </ScrollView>
 
-    <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Save"
-            android:id="@+id/btnSave"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/layout_"
+        android:layout_below="@+id/view"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="15dp">
 
-</LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/artistRow1Layout"
+            android:background="#ffffffff">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/albumArt1"
+                android:minHeight="40dp"
+                android:minWidth="40dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                android:text="Band 1"
+                android:id="@+id/editBand1"
+                android:layout_weight="0"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="#d1000000"
+                android:clickable="true"
+                android:textSize="20dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                android:gravity="left|center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="#ffffffff">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/albumArt2"
+                android:minHeight="40dp"
+                android:minWidth="40dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                android:text="Band 2"
+                android:ems="10"
+                android:id="@+id/editBand2"
+                android:layout_weight="0"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="#d1000000"
+                android:clickable="true"
+                android:textSize="20dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                android:gravity="left|center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="#ffffffff">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/albumArt3"
+                android:minHeight="40dp"
+                android:minWidth="40dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                android:text="Band 3"
+                android:ems="10"
+                android:id="@+id/editBand3"
+                android:layout_weight="0"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="#d1000000"
+                android:clickable="true"
+                android:textSize="20dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                android:gravity="left|center" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/layout_"
+        android:layout_alignStart="@+id/layout_"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_alignRight="@+id/layout_"
+        android:layout_alignEnd="@+id/layout_">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Change\nUsername"
+            android:id="@+id/btnChangeUsername"
+            android:nestedScrollingEnabled="false"
+            android:background="@color/button_material_light"
+            android:layout_marginRight="1dp"
+            android:layout_weight="0.5"
+            android:layout_margin="5dp" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Reset\nProfile"
+            android:id="@+id/profileReset"
+            android:background="@color/button_material_light"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="0.5"
+            android:layout_margin="5dp" />
+    </LinearLayout>
+
+</RelativeLayout>

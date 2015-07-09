@@ -80,15 +80,6 @@ public class MainFragment extends Fragment {
 
         mSocket = MainActivity.mSocket;
 
-        /* initialize class variables */
-        song1 = (TextView) view.findViewById(R.id.topSong1);
-        song2 = (TextView) view.findViewById(R.id.topSong2);
-        song3 = (TextView) view.findViewById(R.id.topSong3);
-        song1Art = (ImageView) view.findViewById(R.id.songArt1);
-        song2Art = (ImageView) view.findViewById(R.id.songArt2);
-        song3Art = (ImageView) view.findViewById(R.id.songArt3);
-        artistArt = (ImageView) view.findViewById(R.id.lastAlbumArt);
-        prevArtist = (TextView) view.findViewById(R.id.lastArtistName);
 
         /* initialize user preferences from local data */
         profile = getActivity().getSharedPreferences("UserInfo", 0);
@@ -104,10 +95,10 @@ public class MainFragment extends Fragment {
 
 
         /* Set album art */
-        song1Art.setImageResource(R.drawable.albumartph40);
-        song2Art.setImageResource(R.drawable.albumartph40);
-        song3Art.setImageResource(R.drawable.albumartph40);
-        artistArt.setImageResource(R.drawable.albumartph40);
+//        song1Art.setImageResource(R.drawable.albumartph40);
+//        song2Art.setImageResource(R.drawable.albumartph40);
+//        song3Art.setImageResource(R.drawable.albumartph40);
+//        artistArt.setImageResource(R.drawable.albumartph40);
 
     }
 
@@ -129,50 +120,7 @@ public class MainFragment extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        loadData();
     }
-
-    private void loadData() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                final String tempUsername = profile.getString("PrevArtist", "No Profile");
-                MainActivity.username = tempUsername;
-                final String prevsong1 = profile.getString("prevtopSong1", "Song 1");
-                final String prevsong2 = profile.getString("prevtopSong2", "Song 2");
-                final String prevsong3 = profile.getString("prevtopSong3", "Song 3");
-
-                getActivity().runOnUiThread(new Runnable(){
-                        @Override
-                        public void run(){
-                            prevArtist.setText(tempUsername);
-                            song1.setText(prevsong1);
-                            song2.setText(prevsong2);
-                            song3.setText(prevsong3);
-                        }
-                    });
-                }
-        }).start();
-    }
-
-    private LinearLayout.OnClickListener onArtistClick(final TextView band){
-        Button.OnClickListener ret = new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                if(getActivity() != null)
-                {
-//                    Intent intent = new Intent(getActivity(), ArtistProfileActivity.class);
-//                    Bundle b = new Bundle();
-//                    b.putString(band.getText().toString().trim(), "artist");
-//                    intent.putExtras(b);
-//                    startActivity(intent);
-                }
-            }
-        };
-
-        return ret;
-    }
-
 
 
     private Button.OnClickListener onChatClick(){
