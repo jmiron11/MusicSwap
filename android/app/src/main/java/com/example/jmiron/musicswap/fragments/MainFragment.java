@@ -1,7 +1,6 @@
 package com.example.jmiron.musicswap.fragments;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,37 +13,34 @@ import com.example.jmiron.musicswap.adapters.MessageAdapter;
 import com.example.jmiron.musicswap.data.MessageContainer;
 import com.example.jmiron.musicswap.dialogs.NoConnectionDialogFragment;
 import com.example.jmiron.musicswap.R;
-import com.example.jmiron.musicswap.activities.ChatActivity;
-import com.example.jmiron.musicswap.activities.MainActivity;
 import com.example.jmiron.musicswap.handlers.PreferencesHandler;
 import com.example.jmiron.musicswap.handlers.ServerHandler;
-import com.github.nkzawa.socketio.client.Socket;
+import com.github.nkzawa.emitter.Emitter;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MainFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MainFragment extends Fragment {;
-
-    private Socket mSocket;
 
     private ArrayList<MessageContainer> mMessageArray;
     private MessageAdapter mMessageAdapter;
     private ListView mMessageView;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment MainFragment.
-     */
+    private static Emitter.Listener matchFound = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            JSONObject name = (JSONObject)args[0];
+            JSONObject details = (JSONObject)args[1];
+            MessageContainer newMatch = new MessageContainer();
+            newMatch.name = "Match Found: " + name.toString();
+            newMatch.details =  details.toString();
+            newMatch.imageId = R.drawable.albumartph40; //TODO: Set it based on args[1], the artist
+            newMatch.type = 1;
+        }
+    };
+
     public static MainFragment newInstance() {
         MainFragment fragment = new MainFragment();
         Bundle args = new Bundle();
@@ -58,7 +54,7 @@ public class MainFragment extends Fragment {;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        ServerHandler.mSocket.on("match_found", matchFound);
     }
 
     @Override
@@ -131,6 +127,7 @@ public class MainFragment extends Fragment {;
 
     public void onDestroy(){
         super.onDestroy();
+        ServerHandler.mSocket.off("match_found", matchFound);
     }
 
     private void addInfo(MessageContainer newInfo)

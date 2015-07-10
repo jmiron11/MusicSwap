@@ -58,7 +58,6 @@ public class PreferencesHandler {
         profileEditor.commit();
     }
 
-
     public static String getUsername(Activity callActivity){ return callActivity.getSharedPreferences(profileName, 0).getString("username", null); }
     public static String getArtist1(Activity callActivity) { return callActivity.getSharedPreferences(profileName, 0).getString("artist1", null); }
     public static String getArtist2(Activity callActivity) { return callActivity.getSharedPreferences(profileName, 0).getString("artist2", null); }

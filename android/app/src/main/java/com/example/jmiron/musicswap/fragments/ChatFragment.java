@@ -33,32 +33,6 @@ public class ChatFragment extends Fragment {
     private ListView mChatText;
     private ArrayList<String> mMessageArray = new ArrayList<String>();
     private ChatMessageAdapter mMessageAdapter;
-    private Socket mSocket = MainActivity.mSocket;
-
-    private Emitter.Listener onNewMessage = new Emitter.Listener() {
-        @Override
-        public void call(final Object... args) {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    String message = (String) args[0];
-                    addMessage(message);
-                }
-            });
-        }
-    };
-
-    private Emitter.Listener onNewUser = new Emitter.Listener() {
-        @Override
-        public void call(final Object... args) {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    addMessage("A user has joined the room!");
-                }
-            });
-        }
-    };
 
 
     /**
@@ -81,9 +55,6 @@ public class ChatFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mSocket.on("new_message", onNewMessage);
-        mSocket.on("new_user", onNewUser);
     }
 
     @Override
@@ -148,9 +119,6 @@ public class ChatFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         //TODO: Add username to leaving chat
-        mSocket.emit("chat_user_left");
-        mSocket.off("chat_new_message", onNewMessage);
-        mSocket.off("chat_new_user", onNewUser);
     }
 
 
@@ -165,7 +133,6 @@ public class ChatFragment extends Fragment {
         //TODO: Add username along with message
         mInputText.setText("");
         addMessage(toSend);
-        mSocket.emit("chat_new_message", toSend);
     }
 
     public void addMessage(String message)

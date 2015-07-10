@@ -3,6 +3,7 @@ package com.example.jmiron.musicswap.handlers;
 import android.util.Log;
 
 import com.example.jmiron.musicswap.activities.MainActivity;
+import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 

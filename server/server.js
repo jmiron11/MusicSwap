@@ -48,7 +48,7 @@ io.sockets.on('connection', function (socket) {
         var artist1 = profile.artist1
         var artist2 = profile.artist2
         var artist3 = profile.artist3
-        mongoHandler.findMatch(username, socket.id, artist1, artist2, artist3)
+        mongoHandler.findMatch(username, socket.id, artist1, artist2, artist3, io)
     })
 
     socket.on('disconnect', function(){
@@ -57,3 +57,5 @@ io.sockets.on('connection', function (socket) {
 })
 server.listen(8080)
 console.log("Server Running on 8080");
+
+exports.io = io

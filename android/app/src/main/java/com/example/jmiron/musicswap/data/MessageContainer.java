@@ -12,6 +12,8 @@ public class MessageContainer implements Parcelable {
     public int imageId;
     public int type;
 
+    public MessageContainer(){ }
+
     public MessageContainer(String newName, String newDetails, int newImageId, int newType)
     {
         name = newName;

@@ -2,7 +2,6 @@ package com.example.jmiron.musicswap.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,15 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.jmiron.musicswap.R;
-import com.example.jmiron.musicswap.activities.MainActivity;
 import com.example.jmiron.musicswap.activities.NewProfileActivity;
 import com.example.jmiron.musicswap.handlers.PreferencesHandler;
 import com.example.jmiron.musicswap.handlers.ServerHandler;
-import com.github.nkzawa.socketio.client.Socket;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 
 
 public class ProfileFragment extends Fragment {
