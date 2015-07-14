@@ -11,9 +11,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.jmiron.musicswap.R;
+import com.example.jmiron.musicswap.data.ProfileArtistContainer;
+import com.example.jmiron.musicswap.handlers.PreferencesHandler;
 import com.example.jmiron.musicswap.handlers.ServerHandler;
 import com.example.jmiron.musicswap.interfaces.ViewPagerFragmentInterface;
-import com.example.jmiron.musicswap.handlers.PreferencesHandler;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 
 
 /**
@@ -100,9 +105,16 @@ public class NewProfileSaveFragment extends Fragment implements ViewPagerFragmen
 
     private void loadData(){
         username.setText(PreferencesHandler.getUsername(getActivity()));
-        artist1.setText(PreferencesHandler.getArtist1(getActivity()));
-        artist2.setText(PreferencesHandler.getArtist2(getActivity()));
-        artist3.setText(PreferencesHandler.getArtist3(getActivity()));
+        ArrayList<ProfileArtistContainer> artists = PreferencesHandler.getArtists(getActivity());
+
+        //TODO: Variable length artists
+        Iterator<ProfileArtistContainer> it = artists.iterator();
+        if(it.hasNext())
+            artist1.setText(it.next().artist);
+        if(it.hasNext())
+            artist2.setText(it.next().artist);
+        if(it.hasNext())
+            artist3.setText(it.next().artist);
     }
 
     @Override

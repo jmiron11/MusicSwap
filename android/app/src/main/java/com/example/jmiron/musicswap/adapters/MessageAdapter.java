@@ -2,11 +2,9 @@ package com.example.jmiron.musicswap.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,11 +17,9 @@ import java.util.ArrayList;
  * Created by jmiron on 7/9/2015.
  */
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
-    private LayoutInflater mInflater;
     private ArrayList<MessageContainer> mMessages;
 
     public MessageAdapter(Context context, ArrayList<MessageContainer> infoData) {
-        mInflater = LayoutInflater.from(context);
         mMessages = infoData;
     }
 

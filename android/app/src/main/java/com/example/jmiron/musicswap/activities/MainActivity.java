@@ -2,25 +2,16 @@ package com.example.jmiron.musicswap.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.WindowManager;
 
+import com.example.jmiron.musicswap.R;
 import com.example.jmiron.musicswap.adapters.MainPagerAdapter;
 import com.example.jmiron.musicswap.adapters.NewProfilePagerAdapter;
-import com.example.jmiron.musicswap.R;
 import com.example.jmiron.musicswap.handlers.LastFmHandler;
 import com.example.jmiron.musicswap.handlers.ServerHandler;
-import com.example.jmiron.musicswap.interfaces.ViewPagerFragmentInterface;
-import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
-
-import java.net.URISyntaxException;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -4,8 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.jmiron.musicswap.fragments.MatchFragment;
 import com.example.jmiron.musicswap.fragments.MainFragment;
+import com.example.jmiron.musicswap.fragments.MatchFragment;
 import com.example.jmiron.musicswap.fragments.ProfileFragment;
 
 /**

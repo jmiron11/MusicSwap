@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.example.jmiron.musicswap.R;
 import com.example.jmiron.musicswap.data.MatchContainer;
-import com.example.jmiron.musicswap.data.MessageContainer;
 
 import java.util.ArrayList;
 
@@ -18,12 +17,10 @@ import java.util.ArrayList;
  * Created by jmiron on 7/10/2015.
  */
 public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> {
-    private LayoutInflater mInflater;
     private ArrayList<MatchContainer> mMatches;
 
 
     public MatchAdapter(Context context, ArrayList<MatchContainer> matchData) {
-        mInflater = LayoutInflater.from(context);
         mMatches = matchData;
     }
 

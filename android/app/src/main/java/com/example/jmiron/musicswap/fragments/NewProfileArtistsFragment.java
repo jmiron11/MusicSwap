@@ -10,8 +10,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.jmiron.musicswap.R;
-import com.example.jmiron.musicswap.interfaces.ViewPagerFragmentInterface;
+import com.example.jmiron.musicswap.data.ProfileArtistContainer;
 import com.example.jmiron.musicswap.handlers.PreferencesHandler;
+import com.example.jmiron.musicswap.interfaces.ViewPagerFragmentInterface;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 
 
 /**
@@ -60,9 +65,18 @@ public class NewProfileArtistsFragment extends Fragment implements ViewPagerFrag
         artistName2 = (EditText) view.findViewById(R.id.artist2Field);
         artistName3 = (EditText) view.findViewById(R.id.artist3Field);
 
-        artistName1.setText(PreferencesHandler.getArtist1(getActivity()));
-        artistName2.setText(PreferencesHandler.getArtist2(getActivity()));
-        artistName3.setText(PreferencesHandler.getArtist3(getActivity()));
+        //TODO: Variable Length Artists
+        ArrayList<ProfileArtistContainer> artists = PreferencesHandler.getArtists(getActivity());
+        if(artists != null)
+        {
+            Iterator<ProfileArtistContainer> it = artists.iterator();
+            if(it.hasNext())
+                artistName1.setText(it.next().artist);
+            if(it.hasNext())
+                artistName2.setText(it.next().artist);
+            if(it.hasNext())
+                artistName3.setText(it.next().artist);
+        }
     }
 
     @Override

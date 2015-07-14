@@ -3,23 +3,18 @@ package com.example.jmiron.musicswap.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.jmiron.musicswap.R;
 import com.example.jmiron.musicswap.adapters.MatchAdapter;
-import com.example.jmiron.musicswap.adapters.MessageAdapter;
 import com.example.jmiron.musicswap.data.MatchContainer;
-import com.example.jmiron.musicswap.data.MessageContainer;
 import com.example.jmiron.musicswap.handlers.PreferencesHandler;
 import com.example.jmiron.musicswap.handlers.ServerHandler;
-import com.example.jmiron.musicswap.interfaces.ViewPagerFragmentInterface;
 import com.github.nkzawa.emitter.Emitter;
 
 import org.json.JSONArray;

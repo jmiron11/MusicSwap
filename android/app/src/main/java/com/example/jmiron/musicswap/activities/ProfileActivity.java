@@ -1,17 +1,12 @@
 package com.example.jmiron.musicswap.activities;
 
-import android.content.SharedPreferences;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.WindowManager;
-import android.widget.TextView;
 
-import com.example.jmiron.musicswap.fragments.ProfileFragment;
 import com.example.jmiron.musicswap.R;
+import com.example.jmiron.musicswap.fragments.ProfileFragment;
 
 
 public class ProfileActivity extends AppCompatActivity {

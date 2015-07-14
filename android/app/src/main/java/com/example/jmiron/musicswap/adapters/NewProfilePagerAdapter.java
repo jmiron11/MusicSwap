@@ -4,10 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.example.jmiron.musicswap.fragments.MainFragment;
 import com.example.jmiron.musicswap.fragments.NewProfileArtistsFragment;
 import com.example.jmiron.musicswap.fragments.NewProfileSaveFragment;
 import com.example.jmiron.musicswap.fragments.NewProfileUsernameFragment;
-import com.example.jmiron.musicswap.fragments.MainFragment;
 
 /**
  * Created by jmiron on 7/8/2015.

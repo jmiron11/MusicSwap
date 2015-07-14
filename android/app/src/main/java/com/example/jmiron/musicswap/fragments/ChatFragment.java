@@ -1,8 +1,8 @@
 package com.example.jmiron.musicswap.fragments;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,11 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.example.jmiron.musicswap.adapters.ChatMessageAdapter;
 import com.example.jmiron.musicswap.R;
-import com.example.jmiron.musicswap.activities.MainActivity;
-import com.github.nkzawa.emitter.Emitter;
-import com.github.nkzawa.socketio.client.Socket;
+import com.example.jmiron.musicswap.adapters.ChatMessageAdapter;
 
 import java.util.ArrayList;
 
@@ -118,7 +115,6 @@ public class ChatFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        //TODO: Add username to leaving chat
     }
 
 
@@ -130,7 +126,6 @@ public class ChatFragment extends Fragment {
             return;
         }
 
-        //TODO: Add username along with message
         mInputText.setText("");
         addMessage(toSend);
     }

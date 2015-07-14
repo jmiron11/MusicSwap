@@ -3,23 +3,21 @@ package com.example.jmiron.musicswap.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ListView;
 
-import com.example.jmiron.musicswap.adapters.MessageAdapter;
-import com.example.jmiron.musicswap.data.MessageContainer;
-import com.example.jmiron.musicswap.dialogs.NoConnectionDialogFragment;
 import com.example.jmiron.musicswap.R;
+import com.example.jmiron.musicswap.adapters.MessageAdapter;
+import com.example.jmiron.musicswap.adapters.ProfileArtistAdapter;
+import com.example.jmiron.musicswap.data.MessageContainer;
+import com.example.jmiron.musicswap.data.ProfileArtistContainer;
+import com.example.jmiron.musicswap.dialogs.NoConnectionDialogFragment;
 import com.example.jmiron.musicswap.handlers.PreferencesHandler;
 import com.example.jmiron.musicswap.handlers.ServerHandler;
-import com.example.jmiron.musicswap.interfaces.ViewPagerFragmentInterface;
 import com.github.nkzawa.emitter.Emitter;
 
 import org.json.JSONException;
@@ -103,10 +101,6 @@ public class MainFragment extends Fragment {
             PreferencesHandler.setFirstFalse(getActivity());
         }
 
-        /* assign button on click listeners */
-        Button chatBtn = (Button) view.findViewById(R.id.btnFindChat);
-        chatBtn.setOnClickListener(onChatClick());
-
         Button swapBtn = (Button) view.findViewById(R.id.btnSuggestArtist);
         swapBtn.setOnClickListener(onSwapClick());
 
@@ -154,30 +148,6 @@ public class MainFragment extends Fragment {
         mMessageAdapter.notifyItemInserted(0);
     }
 
-    private Button.OnClickListener onChatClick(){
-        Button.OnClickListener ret = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!ServerHandler.isConnected()) {
-                    NoConnectionDialogFragment noConnDialog = new NoConnectionDialogFragment();
-                    noConnDialog.show(getActivity().getSupportFragmentManager(), "No Connection");
-                }
-//                if (getActivity() != null) {
-//                    if (MainActivity.mSocket.connected()) {
-//                        //TODO: Add username to joining chat
-//                        MainActivity.mSocket.emit("chat_user_join");
-//                        Intent intent = new Intent(getActivity(), ChatActivity.class);
-//                        startActivity(intent);
-//                    } else {
-//                        NoConnectionDialogFragment noConnDialog = new NoConnectionDialogFragment();
-//                        noConnDialog.show(getActivity().getSupportFragmentManager(), "No Connection");
-//                    }
-//                }
-            }
-        };
-        return ret;
-    }
-
     private Button.OnClickListener onSwapClick(){
         Button.OnClickListener ret = new View.OnClickListener() {
             @Override
@@ -186,11 +156,17 @@ public class MainFragment extends Fragment {
                     NoConnectionDialogFragment noConnDialog = new NoConnectionDialogFragment();
                     noConnDialog.show(getActivity().getSupportFragmentManager(), "No Connection");
                 }
+
+                //TODO: Get this to send an array
                 final String username = PreferencesHandler.getUsername(getActivity());
-                final String artist1 = PreferencesHandler.getArtist1(getActivity());
-                final String artist2 = PreferencesHandler.getArtist2(getActivity());
-                final String artist3 = PreferencesHandler.getArtist3(getActivity());
-                ServerHandler.findMatch(username, artist1, artist2, artist3);
+                ArrayList<ProfileArtistContainer> artists = PreferencesHandler.getArtists(getActivity());
+                if(artists.size() >= 3)
+                {
+                    String artist1 = artists.get(0).artist;
+                    String artist2 = artists.get(1).artist;
+                    String artist3 = artists.get(2).artist;
+                    ServerHandler.findMatch(username, artist1, artist2, artist3);
+                }
             }
         };
         return ret;

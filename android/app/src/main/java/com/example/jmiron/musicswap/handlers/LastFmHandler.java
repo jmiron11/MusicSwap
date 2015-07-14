@@ -35,7 +35,7 @@ public class LastFmHandler {
         protected String doInBackground(String... params) {
             String artistName = params[0];
             Artist artist = Artist.getInfo(artistName, key);
-            return artist.getImageURL(ImageSize.valueOf("MEDIUM"));
+            return artist.getImageURL(ImageSize.valueOf("LARGE"));
         }
     }
 }
