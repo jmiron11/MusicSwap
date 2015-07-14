@@ -2,9 +2,7 @@ package com.example.jmiron.musicswap.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.view.ViewGroup;
 
 import com.example.jmiron.musicswap.fragments.NewProfileArtistsFragment;
 import com.example.jmiron.musicswap.fragments.NewProfileSaveFragment;

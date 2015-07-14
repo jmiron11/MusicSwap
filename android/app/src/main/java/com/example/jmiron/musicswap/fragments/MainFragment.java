@@ -3,6 +3,10 @@ package com.example.jmiron.musicswap.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,29 +19,40 @@ import com.example.jmiron.musicswap.dialogs.NoConnectionDialogFragment;
 import com.example.jmiron.musicswap.R;
 import com.example.jmiron.musicswap.handlers.PreferencesHandler;
 import com.example.jmiron.musicswap.handlers.ServerHandler;
+import com.example.jmiron.musicswap.interfaces.ViewPagerFragmentInterface;
 import com.github.nkzawa.emitter.Emitter;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 
-public class MainFragment extends Fragment {;
+public class MainFragment extends Fragment {
 
-    private ArrayList<MessageContainer> mMessageArray;
+    private ArrayList<MessageContainer> mMessageArray = new ArrayList<>();
     private MessageAdapter mMessageAdapter;
-    private ListView mMessageView;
+    private RecyclerView mMessageView;
 
-    private static Emitter.Listener matchFound = new Emitter.Listener() {
+    private Emitter.Listener matchFound = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
-            JSONObject name = (JSONObject)args[0];
-            JSONObject details = (JSONObject)args[1];
-            MessageContainer newMatch = new MessageContainer();
-            newMatch.name = "Match Found: " + name.toString();
-            newMatch.details =  details.toString();
-            newMatch.imageId = R.drawable.albumartph40; //TODO: Set it based on args[1], the artist
-            newMatch.type = 1;
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    MessageContainer newMatch = new MessageContainer();
+                    JSONObject received = (JSONObject) args[0];
+                    try {
+                        newMatch.name = received.getString("username");
+                        newMatch.details = received.getString("artist");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    newMatch.imageId = R.drawable.albumartph40; //TODO: Set it based on args[1], the artist
+                    newMatch.type = 1;
+                    addInfo(newMatch);
+                }
+            });
         }
     };
 
@@ -60,15 +75,27 @@ public class MainFragment extends Fragment {;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(
+        View v = inflater.inflate(
                 R.layout.fragment_main,container, false);
+        /* restoring the info view */
+        if(savedInstanceState != null){
+            /* copy old info array data to the new emptied info array */
+            ArrayList<MessageContainer> prevData = savedInstanceState.getParcelableArrayList("info");
+            mMessageArray.clear();
+            for (MessageContainer data : prevData){
+                addInfo(data);
+            }
+        }
+
+        mMessageView = (RecyclerView) v.findViewById(R.id.mainList);
+        mMessageView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mMessageView.setAdapter(mMessageAdapter); // assign the adapter to the infoview
+
+        return v;
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
-
-        mMessageView = (ListView) view.findViewById(R.id.mainList);
-        mMessageView.setAdapter(mMessageAdapter); // assign the adapter to the infoview
 
         if(PreferencesHandler.getFirst(getActivity()))
         {
@@ -83,20 +110,11 @@ public class MainFragment extends Fragment {;
         Button swapBtn = (Button) view.findViewById(R.id.btnSuggestArtist);
         swapBtn.setOnClickListener(onSwapClick());
 
-        /* restoring the info view */
-//        if(savedInstanceState != null){
-//            /* copy old info array data to the new emptied info array */
-//            ArrayList<MessageContainer> prevData = savedInstanceState.getParcelableArrayList("info");
-//            for (MessageContainer data : prevData){
-//                addInfo(data);
-//            }
-//        }
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mMessageArray = new ArrayList<>();
         mMessageAdapter = new MessageAdapter(getActivity(), mMessageArray);
 
         ArrayList<MessageContainer> prevMessages = PreferencesHandler.getMessages(getActivity());
@@ -111,7 +129,7 @@ public class MainFragment extends Fragment {;
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-//        outState.putParcelableArrayList("info", mMessageArray);
+        outState.putParcelableArrayList("info", mMessageArray);
     }
 
     @Override
@@ -133,6 +151,7 @@ public class MainFragment extends Fragment {;
     private void addInfo(MessageContainer newInfo)
     {
         mMessageArray.add(0, newInfo);
+        mMessageAdapter.notifyItemInserted(0);
     }
 
     private Button.OnClickListener onChatClick(){
@@ -176,5 +195,4 @@ public class MainFragment extends Fragment {;
         };
         return ret;
     }
-
 }

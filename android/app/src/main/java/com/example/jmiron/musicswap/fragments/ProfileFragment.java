@@ -2,6 +2,7 @@ package com.example.jmiron.musicswap.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 
 import com.example.jmiron.musicswap.R;
 import com.example.jmiron.musicswap.activities.NewProfileActivity;
+import com.example.jmiron.musicswap.handlers.UrlImageHandler;
+import com.example.jmiron.musicswap.handlers.LastFmHandler;
 import com.example.jmiron.musicswap.handlers.PreferencesHandler;
 import com.example.jmiron.musicswap.handlers.ServerHandler;
 
@@ -20,6 +23,7 @@ import com.example.jmiron.musicswap.handlers.ServerHandler;
 public class ProfileFragment extends Fragment {
     private TextView username, artist1, artist2, artist3;
     private ImageView albumArt1, albumArt2, albumArt3;
+    private Bitmap art1, art2, art3;
 
     public static ProfileFragment newInstance() {
         ProfileFragment fragment = new ProfileFragment();
@@ -37,6 +41,15 @@ public class ProfileFragment extends Fragment {
 
         if(!ServerHandler.isConnected())
             ServerHandler.connectToServer();
+
+        /* lets set some album art! */
+        String albumArt1Url = LastFmHandler.getArtistArtUrl(PreferencesHandler.getArtist1(getActivity()));
+        String albumArt2Url = LastFmHandler.getArtistArtUrl(PreferencesHandler.getArtist2(getActivity()));
+        String albumArt3Url = LastFmHandler.getArtistArtUrl(PreferencesHandler.getArtist3(getActivity()));
+
+        art1 = UrlImageHandler.getUrlBitmap(albumArt1Url);
+        art2 = UrlImageHandler.getUrlBitmap(albumArt2Url);
+        art3 = UrlImageHandler.getUrlBitmap(albumArt3Url);
     }
 
     @Override
@@ -75,11 +88,17 @@ public class ProfileFragment extends Fragment {
         Button resetProfileBtn = (Button) v.findViewById(R.id.profileReset);
         resetProfileBtn.setOnClickListener(onResetProfileClick());
 
+        albumArt1.setImageBitmap(art1);
+        albumArt2.setImageBitmap(art2);
+        albumArt3.setImageBitmap(art3);
+
+
         return v;
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
+
     }
 
     @Override

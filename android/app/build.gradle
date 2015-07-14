@@ -26,4 +26,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.github.nkzawa:socket.io-client:0.5.2'
     compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.android.support:recyclerview-v7:+'
+    compile files('libs/lastfm-java-0.1.2.jar')
 }

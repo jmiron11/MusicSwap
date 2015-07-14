@@ -1,6 +1,8 @@
 package com.example.jmiron.musicswap.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,57 +18,51 @@ import java.util.ArrayList;
 /**
  * Created by jmiron on 7/9/2015.
  */
-public class MessageAdapter extends BaseAdapter {
+public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
     private LayoutInflater mInflater;
-    private ArrayList<MessageContainer> mInfo;
+    private ArrayList<MessageContainer> mMessages;
 
     public MessageAdapter(Context context, ArrayList<MessageContainer> infoData) {
         mInflater = LayoutInflater.from(context);
-        mInfo = infoData;
+        mMessages = infoData;
     }
 
     @Override
-    public int getCount() {
-        return mInfo.size();
+    public MessageAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.info_layout, parent, false);
+        return new MessageAdapter.ViewHolder(view);
     }
 
     @Override
-    public Object getItem(int position) {
-        return mInfo.get(position);
+    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+        MessageContainer message = mMessages.get(position);
+        viewHolder.setName(message.name);
+        viewHolder.setDetails(message.details);
+        viewHolder.setArt(message.imageId);
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
+    public int getItemCount()
+    {
+        return mMessages.size();
     }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
-        if(convertView == null) { // Only inflating if necessary is great for performance
-            convertView = mInflater.inflate(R.layout.info_layout, parent, false);
-            holder = new ViewHolder();
-            holder.infoName = (TextView) convertView.findViewById(R.id.infoName);
-            holder.details = (TextView) convertView.findViewById(R.id.infoDetail);
-            holder.infoArt = (ImageView) convertView.findViewById(R.id.infoArt);
-            convertView.setTag(holder);
-        }
-        else
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView infoName;
+        private TextView details;
+        private ImageView infoArt;
+
+        public ViewHolder(View itemView)
         {
-            holder  = (ViewHolder)convertView.getTag();
+            super(itemView);
+            infoName = (TextView) itemView.findViewById(R.id.infoName);
+            details = (TextView) itemView.findViewById(R.id.infoDetail);
+            infoArt = (ImageView) itemView.findViewById(R.id.infoArt);
         }
 
-        MessageContainer infoView = mInfo.get(position);
-        holder.infoName.setText(infoView.name);
-        holder.details.setText(infoView.details);
-        holder.infoArt.setImageResource(infoView.imageId);
-
-        return convertView;
-    }
-
-    private class ViewHolder {
-        public TextView infoName;
-        public TextView details;
-        public ImageView infoArt;
+        public void setName(String newName){ infoName.setText(newName); }
+        public void setDetails(String newDetails){ details.setText(newDetails); }
+        public void setArt(int imageResource){ infoArt.setImageResource(imageResource); }
     }
 }

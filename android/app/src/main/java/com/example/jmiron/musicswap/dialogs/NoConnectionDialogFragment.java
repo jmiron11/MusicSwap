@@ -23,10 +23,6 @@ public class NoConnectionDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.try_connect, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         ServerHandler.connectToServer();
-                        if(!ServerHandler.isConnected()){
-                            Intent intent = new Intent(getActivity(), ChatActivity.class);
-                            startActivity(intent);
-                        }
                     }
                 })
                 .setNegativeButton(R.string.back, new DialogInterface.OnClickListener() {

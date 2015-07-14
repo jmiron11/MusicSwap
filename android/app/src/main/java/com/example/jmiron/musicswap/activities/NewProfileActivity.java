@@ -1,17 +1,12 @@
 package com.example.jmiron.musicswap.activities;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.example.jmiron.musicswap.R;
 import com.example.jmiron.musicswap.adapters.NewProfilePagerAdapter;
-import com.example.jmiron.musicswap.interfaces.NewProfileFragmentInterface;
+import com.example.jmiron.musicswap.interfaces.ViewPagerFragmentInterface;
 
 /**
  * Created by jmiron on 7/8/2015.
@@ -31,7 +26,7 @@ public class NewProfileActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                NewProfileFragmentInterface fragment = (NewProfileFragmentInterface) mProfileAdapter.instantiateItem(mViewPager, position);
+                ViewPagerFragmentInterface fragment = (ViewPagerFragmentInterface) mProfileAdapter.instantiateItem(mViewPager, position);
                 if (fragment != null) {
                     fragment.fragmentScrolled();
                 }
@@ -39,7 +34,7 @@ public class NewProfileActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                NewProfileFragmentInterface fragment = (NewProfileFragmentInterface) mProfileAdapter.instantiateItem(mViewPager, position);
+                ViewPagerFragmentInterface fragment = (ViewPagerFragmentInterface) mProfileAdapter.instantiateItem(mViewPager, position);
                 if (fragment != null) {
                     fragment.fragmentBecameVisible();
                 }

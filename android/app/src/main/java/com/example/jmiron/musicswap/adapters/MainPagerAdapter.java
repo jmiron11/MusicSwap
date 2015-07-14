@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.jmiron.musicswap.fragments.PreviousMatchFragment;
+import com.example.jmiron.musicswap.fragments.MatchFragment;
 import com.example.jmiron.musicswap.fragments.MainFragment;
 import com.example.jmiron.musicswap.fragments.ProfileFragment;
 
@@ -22,7 +22,7 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch(position){
             case 0:
-                return new PreviousMatchFragment();
+                return new MatchFragment();
             case 1:
                 return new MainFragment();
             case 2:

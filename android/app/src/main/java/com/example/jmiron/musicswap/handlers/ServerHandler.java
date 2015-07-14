@@ -17,7 +17,7 @@ import java.net.URISyntaxException;
  */
 public class ServerHandler {
 
-    public static String serverAddress = "http://10.0.2.2:8080";
+    public static String serverAddress = "http://musicswap-jmironapps.rhcloud.com/8000";
     public static Socket mSocket;
 
     public static void connectToServer(){
@@ -27,6 +27,8 @@ public class ServerHandler {
             e.printStackTrace();
         }
         mSocket.connect();
+        if(mSocket.connected())
+            mSocket.emit("new_connect");
     }
 
     public static void closeConnection()
@@ -41,35 +43,57 @@ public class ServerHandler {
 
     public static boolean isConnected(){ return mSocket.connected(); }
 
-    public static void saveProfile(String username, String artist1, String artist2, String artist3)
-    {
-        JSONObject new_profile = new JSONObject();
-        try {
-            new_profile.put("username", username);
-            new_profile.put("artist1", artist1);
-            new_profile.put("artist2", artist2);
-            new_profile.put("artist3", artist3);
-        } catch (JSONException e) {
-            e.printStackTrace();
+    public static void saveProfile(String username, String artist1, String artist2, String artist3) {
+        if (mSocket.connected())
+        {
+            JSONObject new_profile = new JSONObject();
+            try {
+                new_profile.put("username", username);
+                new_profile.put("artist1", artist1);
+                new_profile.put("artist2", artist2);
+                new_profile.put("artist3", artist3);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            mSocket.emit("new_profile", new_profile);
         }
-        mSocket.emit("new_profile", new_profile);
+        else
+        {
+            Log.e("NO_CONN", "socket was not connected on new_profile emit");
+        }
     }
 
     public static void findMatch(String username, String artist1, String artist2, String artist3)
     {
         if(mSocket.connected())
-            {
-                JSONObject new_profile = new JSONObject();
-                try {
-                    new_profile.put("username", username);
-                    new_profile.put("artist1", artist1);
-                    new_profile.put("artist2", artist2);
-                    new_profile.put("artist3", artist3);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                mSocket.emit("find_match", new_profile);
+        {
+            JSONObject new_profile = new JSONObject();
+            try {
+                new_profile.put("username", username);
+                new_profile.put("artist1", artist1);
+                new_profile.put("artist2", artist2);
+                new_profile.put("artist3", artist3);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
+            mSocket.emit("find_match", new_profile);
+        }
+        else
+        {
+            Log.e("NO_CONN", "socket was not connected on find_match emit");
+        }
+    }
+
+    public static void updateMatches(String username)
+    {
+        if(mSocket.connected())
+        {
+            ServerHandler.mSocket.emit("request_matches", username);
+        }
+        else
+        {
+            Log.e("NO_CONN", "socket was not connected on request_matches emit");
+        }
     }
 
 

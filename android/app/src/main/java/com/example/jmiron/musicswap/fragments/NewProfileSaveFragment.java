@@ -11,13 +11,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.jmiron.musicswap.R;
-import com.example.jmiron.musicswap.activities.MainActivity;
 import com.example.jmiron.musicswap.handlers.ServerHandler;
-import com.example.jmiron.musicswap.interfaces.NewProfileFragmentInterface;
+import com.example.jmiron.musicswap.interfaces.ViewPagerFragmentInterface;
 import com.example.jmiron.musicswap.handlers.PreferencesHandler;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 
 /**
@@ -25,7 +21,7 @@ import org.json.JSONObject;
  * Use the {@link NewProfileSaveFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NewProfileSaveFragment extends Fragment implements NewProfileFragmentInterface{
+public class NewProfileSaveFragment extends Fragment implements ViewPagerFragmentInterface {
 
     private SharedPreferences profile;
     private SharedPreferences.Editor profileEditor;

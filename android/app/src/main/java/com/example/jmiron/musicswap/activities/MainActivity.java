@@ -14,7 +14,9 @@ import android.view.WindowManager;
 import com.example.jmiron.musicswap.adapters.MainPagerAdapter;
 import com.example.jmiron.musicswap.adapters.NewProfilePagerAdapter;
 import com.example.jmiron.musicswap.R;
+import com.example.jmiron.musicswap.handlers.LastFmHandler;
 import com.example.jmiron.musicswap.handlers.ServerHandler;
+import com.example.jmiron.musicswap.interfaces.ViewPagerFragmentInterface;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ServerHandler.connectToServer();
+        LastFmHandler.init();
 
         /* Set up horizontal paging (swipe) */
 

@@ -1,0 +1,14 @@
+<android.support.v4.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jmiron.musicswap.fragments.MatchFragment"
+    android:id="@+id/match_refresh_container">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/matchList" />
+
+</android.support.v4.widget.SwipeRefreshLayout>

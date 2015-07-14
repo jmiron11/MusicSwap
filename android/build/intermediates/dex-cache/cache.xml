@@ -2,53 +2,11 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\libs\internal_impl-22.2.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
-        <dex dex="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-7681680502a5f74b9c9ff150264b97ca2e47cd15.jar" />
-    </item>
-    <item
         jar="C:\Users\jmiron\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.0\support-annotations-22.2.0.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
         <dex dex="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.0-e51d245523a2f9635d0bd01d279e684a29ed19d3.jar" />
-    </item>
-    <item
-        jar="C:\Users\jmiron\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.2.4\a60a5e993c98c864010053cb901b7eab25306568\gson-2.2.4.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a60a5e993c98c864010053cb901b7eab25306568">
-        <dex dex="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\pre-dexed\debug\gson-2.2.4-62195261e2ca6de79533980e1c30f5ed1b01bbca.jar" />
-    </item>
-    <item
-        jar="C:\Users\jmiron\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp-ws\2.4.0\69206d28966656052a982ceded583abdeb41cf63\okhttp-ws-2.4.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="69206d28966656052a982ceded583abdeb41cf63">
-        <dex dex="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\pre-dexed\debug\okhttp-ws-2.4.0-f794848006578c6efab1c9198058b0c6a58c3e6d.jar" />
-    </item>
-    <item
-        jar="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
-        <dex dex="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\pre-dexed\debug\classes-f4fbbc266bfc6bf60de320a3b7c03f9e165c6957.jar" />
-    </item>
-    <item
-        jar="C:\Users\jmiron\.gradle\caches\modules-2\files-2.1\com.github.nkzawa\engine.io-client\0.5.1\c83503e6668d63b3d5b2a27edf6e3a54d9eb7a66\engine.io-client-0.5.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="c83503e6668d63b3d5b2a27edf6e3a54d9eb7a66">
-        <dex dex="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\pre-dexed\debug\engine.io-client-0.5.1-8e58d1959faaa4723c22db981d12adf7ed8360db.jar" />
-    </item>
-    <item
-        jar="C:\Users\jmiron\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp\2.4.0\40340c0748190fe897baf7bffbc1b282734294e5\okhttp-2.4.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="40340c0748190fe897baf7bffbc1b282734294e5">
-        <dex dex="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\pre-dexed\debug\okhttp-2.4.0-cf2a0bd3dddfda1a3e66b757b698c9fb5e729435.jar" />
     </item>
     <item
         jar="C:\Users\jmiron\.gradle\caches\modules-2\files-2.1\com.github.nkzawa\socket.io-client\0.5.2\41182e10002a59498572181410172744abd0f637\socket.io-client-0.5.2.jar"
@@ -58,11 +16,32 @@
         <dex dex="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\pre-dexed\debug\socket.io-client-0.5.2-c99cbf9a6aecce3cccc4068c8bfe938bdaf4c262.jar" />
     </item>
     <item
-        jar="C:\Users\jmiron\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.4.0\5b72bf48563ea8410e650de14aa33ff69a3e8c35\okio-1.4.0.jar"
+        jar="C:\Users\jmiron\.gradle\caches\modules-2\files-2.1\com.github.nkzawa\engine.io-client\0.5.1\c83503e6668d63b3d5b2a27edf6e3a54d9eb7a66\engine.io-client-0.5.1.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="5b72bf48563ea8410e650de14aa33ff69a3e8c35">
-        <dex dex="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\pre-dexed\debug\okio-1.4.0-99843cab9840a5d50f9bf1bd30181d95265d87ed.jar" />
+        sha1="c83503e6668d63b3d5b2a27edf6e3a54d9eb7a66">
+        <dex dex="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\pre-dexed\debug\engine.io-client-0.5.1-8e58d1959faaa4723c22db981d12adf7ed8360db.jar" />
+    </item>
+    <item
+        jar="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\libs\lastfm-java-0.1.2.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b1d6f0040f614b09bebfde1cf346ab4a6ffff81d">
+        <dex dex="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\pre-dexed\debug\lastfm-java-0.1.2-a7fd57bc7ee69b5bd9ad7201c2f715c616ee37f8.jar" />
+    </item>
+    <item
+        jar="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5b37cf49773f7f17aca9830efd3053b0cac56728">
+        <dex dex="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\pre-dexed\debug\classes-bc34a76b243a190fb009a798804a06ce80796508.jar" />
+    </item>
+    <item
+        jar="C:\Users\jmiron\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp-ws\2.4.0\69206d28966656052a982ceded583abdeb41cf63\okhttp-ws-2.4.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="69206d28966656052a982ceded583abdeb41cf63">
+        <dex dex="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\pre-dexed\debug\okhttp-ws-2.4.0-f794848006578c6efab1c9198058b0c6a58c3e6d.jar" />
     </item>
     <item
         jar="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.0\jars\classes.jar"
@@ -70,6 +49,41 @@
         revision="22.0.1"
         sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
         <dex dex="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\pre-dexed\debug\classes-a651a54be1677c529e58b86cf9bac114654e2bfe.jar" />
+    </item>
+    <item
+        jar="C:\Users\jmiron\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.4.0\5b72bf48563ea8410e650de14aa33ff69a3e8c35\okio-1.4.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5b72bf48563ea8410e650de14aa33ff69a3e8c35">
+        <dex dex="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\pre-dexed\debug\okio-1.4.0-99843cab9840a5d50f9bf1bd30181d95265d87ed.jar" />
+    </item>
+    <item
+        jar="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\libs\internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-7681680502a5f74b9c9ff150264b97ca2e47cd15.jar" />
+    </item>
+    <item
+        jar="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\pre-dexed\debug\classes-f4fbbc266bfc6bf60de320a3b7c03f9e165c6957.jar" />
+    </item>
+    <item
+        jar="C:\Users\jmiron\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.2.4\a60a5e993c98c864010053cb901b7eab25306568\gson-2.2.4.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568">
+        <dex dex="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\pre-dexed\debug\gson-2.2.4-62195261e2ca6de79533980e1c30f5ed1b01bbca.jar" />
+    </item>
+    <item
+        jar="C:\Users\jmiron\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp\2.4.0\40340c0748190fe897baf7bffbc1b282734294e5\okhttp-2.4.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="40340c0748190fe897baf7bffbc1b282734294e5">
+        <dex dex="C:\Users\jmiron\AndroidStudioProjects\white-ewok\android\app\build\intermediates\pre-dexed\debug\okhttp-2.4.0-cf2a0bd3dddfda1a3e66b757b698c9fb5e729435.jar" />
     </item>
 
 </items>

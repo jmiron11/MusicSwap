@@ -1,7 +1,6 @@
 package com.example.jmiron.musicswap.fragments;
 
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,7 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.jmiron.musicswap.R;
-import com.example.jmiron.musicswap.interfaces.NewProfileFragmentInterface;
+import com.example.jmiron.musicswap.interfaces.ViewPagerFragmentInterface;
 import com.example.jmiron.musicswap.handlers.PreferencesHandler;
 
 
@@ -20,7 +19,7 @@ import com.example.jmiron.musicswap.handlers.PreferencesHandler;
  * Use the {@link NewProfileArtistsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NewProfileArtistsFragment extends Fragment implements NewProfileFragmentInterface {
+public class NewProfileArtistsFragment extends Fragment implements ViewPagerFragmentInterface {
 
     private ImageView artistArt1, artistArt2, artistArt3;
     private EditText artistName1, artistName2, artistName3;
