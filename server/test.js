@@ -1,11 +1,23 @@
-var WebSocket = require('ws')
-, ws = new WebSocket('ws://musicswap-jmironapps.rhcloud.com/8000');
-ws.on('connect', function(){
-    console.log("Connected")
-});
-ws.on('open', function() {
-   console.log("WOOO")
-});
-ws.on('message', function(message) {
-    console.log('received: %s', message);
-});
+var io = require('socket.io')
+
+var socket = require('socket.io-client')('http://127.0.0.1:8080');
+
+// var profile = {
+//     "username" : "Kevin",
+//     "artists"  : ["Foo Fighters", "Manchester Orchestra", "We The Kings", "Local Natives", "Third Eye Blind"],
+// }
+
+socket.on('connect', function(){
+    console.log("Connected to server")
+    socket.emit('new_connect', 'justin')
+    console.log('emitteddddd')
+})
+
+socket.on('event', function(data){})
+
+socket.on('disconnect', function(){
+    console.log("Disconnected from server")
+})
+
+
+
