@@ -28,7 +28,7 @@ public class ProfileArtistAdapter extends RecyclerView.Adapter<ProfileArtistAdap
     //TODO: Set this adapter to grid view
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.match_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.profile_artist_layout, parent, false);
         return new ProfileArtistAdapter.ViewHolder(view);
     }
 

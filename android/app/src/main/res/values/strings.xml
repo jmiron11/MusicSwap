@@ -16,5 +16,7 @@
     <string name="new_user">Enter a username: </string>
     <string name="title_activity_artist_profile">ArtistProfileActivity</string>
     <string name="title_activity_new_profile">NewProfileActivity</string>
+    <string name="add_artist">Add Artist</string>
+    <string name="cancel">Cancel</string>
 
 </resources>
