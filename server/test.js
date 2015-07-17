@@ -9,8 +9,21 @@ var socket = require('socket.io-client')('http://127.0.0.1:8080');
 
 socket.on('connect', function(){
     console.log("Connected to server")
+
+    /* updateSocketId test */
     socket.emit('new_connect', 'justin')
-    console.log('emitteddddd')
+
+
+    /* updateProfile test */
+    // var profile = {
+    // 	'username' : 'Bill',
+    // 	'artists'  : ['The Kooks', 'Michael Buble', 'Twenty One Pilots', 'Fierce Bad Rabbit']
+    // }
+    // socket.emit('update_profile', profile)
+
+    /* updateMatches test */
+   	socket.emit('match_meeee', 'Justin')
+
 })
 
 socket.on('event', function(data){})

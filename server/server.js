@@ -7,13 +7,26 @@ var io = require('socket.io')(server)
 var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
 var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
 
+// initialize the mongoDB conncetion with mongoose
 var mongoose = require('mongoose')
 var dbURI = 'mongodb://127.0.0.1/MusicSwap'
 mongoose.connect(dbURI)
 var db = mongoose.connection
-var gooseHandler = require('gooseHandler')
 
+// initialize handlers
+var socketHandler = require('socketHandler')
 
+// When the connection is succesful, initialize the websocket
+db.on('connected', function() {
+    console.log('Mongoose default connection open to ' + dbURI)
+
+    io.on('connection', socketHandler.handleConnection)
+    server.listen(server_port, server_ip_address, function(){
+        console.log("Listening on " + server_ip_address + ", server_port " + server_port)
+    })
+})
+
+// When there is an error on connecting to the server
 db.on('error', function (err) {
   console.log('Mongoose default connection error: ' + err)
 })
@@ -29,37 +42,4 @@ process.on('SIGINT', function() {
     console.log('Mongoose default connection disconnected through SIGINT termination')
     process.exit(0)
   })
-})
-
-function handleClient (socket) {
-    console.log('A user has connected to the server')
-
-    socket.on('new_connect', function(username){
-        gooseHandler.updateSocketId(username, socket.id)
-    })
-
-    // socket.on('find_match', function(profile){
-    //     var username = profile.username
-    //     var artists = profile.artists
-    //     mongoHandler.addToMatch(username, socket.id, artists)
-    // })
-
-    // socket.on('request_matches', function(username){
-    //     console.log('request_match received')
-    //     mongoHandler.requestMatches(username)
-    // })
-
-    socket.on('disconnect', function(){
-        console.log('A user has disconnected from the server')
-    })
-}
-
-
-db.on('connected', function() {
-    console.log('Mongoose default connection open to ' + dbURI)
-
-    io.on('connection', handleClient)
-    server.listen(server_port, server_ip_address, function(){
-        console.log("Listening on " + server_ip_address + ", server_port " + server_port)
-    })
 })

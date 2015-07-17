@@ -7,3 +7,7 @@
 /android/captures
 /android/.idea/workspace.xml
 /android/.idea/tasks.xml
+/server/node_modules/async
+/server/node_modules/mongoose
+/server/node_modules/socket.io
+/server/node_modules/socket.io-client
