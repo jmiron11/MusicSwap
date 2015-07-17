@@ -9,6 +9,7 @@ var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
 
 // initialize the mongoDB conncetion with mongoose
 var mongoose = require('mongoose')
+mongoose.set('debug', true)
 var dbURI = 'mongodb://127.0.0.1/MusicSwap'
 mongoose.connect(dbURI)
 var db = mongoose.connection
