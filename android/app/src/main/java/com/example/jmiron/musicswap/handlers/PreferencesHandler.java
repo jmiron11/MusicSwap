@@ -18,37 +18,11 @@ import java.util.Set;
  */
 public class PreferencesHandler {
     public static String profileName = "UserInfo";
-    public static void saveUserData(Activity callActivity, String username, String artist1, String artist2, String artist3)
-    {
-        SharedPreferences.Editor profileEditor = callActivity.getSharedPreferences(profileName, 0).edit();
-        profileEditor.putString("username", username);
-        profileEditor.putBoolean("prevProfile", true);
-
-        ArrayList<ProfileArtistContainer> toStore = new ArrayList<>();
-        toStore.add(new ProfileArtistContainer(artist1));
-        toStore.add(new ProfileArtistContainer(artist2));
-        toStore.add(new ProfileArtistContainer(artist3));
-        String mainInfoJSONString = new Gson().toJson(toStore);
-        profileEditor.putString("artists", mainInfoJSONString);
-        profileEditor.commit();
-    }
 
     public static void saveUserData(Activity callActivity, String username)
     {
         SharedPreferences.Editor profileEditor = callActivity.getSharedPreferences(profileName, 0).edit();
         profileEditor.putString("username", username);
-        profileEditor.commit();
-    }
-
-    public static void saveUserData(Activity callActivity, String artist1, String artist2, String artist3)
-    {
-        SharedPreferences.Editor profileEditor = callActivity.getSharedPreferences(profileName, 0).edit();
-        ArrayList<ProfileArtistContainer> toStore = new ArrayList<>();
-        toStore.add(new ProfileArtistContainer(artist1));
-        toStore.add(new ProfileArtistContainer(artist2));
-        toStore.add(new ProfileArtistContainer(artist3));
-        String mainInfoJSONString = new Gson().toJson(toStore);
-        profileEditor.putString("artists", mainInfoJSONString);
         profileEditor.commit();
     }
 
@@ -75,7 +49,7 @@ public class PreferencesHandler {
         profileEditor.commit();
     }
 
-    public static String getUsername(Activity callActivity){ return callActivity.getSharedPreferences(profileName, 0).getString("username", null); }
+    public static String getUsername(Activity callActivity){ return callActivity.getSharedPreferences(profileName, 0).getString("username", "Default"); }
     public static boolean getFirst(Activity callActivity) { return callActivity.getSharedPreferences(profileName, 0).getBoolean("first", true); }
     public static ArrayList<MessageContainer> getMessages(Activity callActivity)
     {

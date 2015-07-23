@@ -30,7 +30,6 @@ public class LastFmHandler {
 
     private static class getArtistUrlTask extends AsyncTask<String, Void, String>
     {
-
         @Override
         protected String doInBackground(String... params) {
             String artistName = params[0];

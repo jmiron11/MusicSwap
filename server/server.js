@@ -7,6 +7,8 @@ var io = require('socket.io')(server)
 var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
 var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
 
+console.log('logging anything')
+
 // initialize the mongoDB conncetion with mongoose
 var mongoose = require('mongoose')
 mongoose.set('debug', true)

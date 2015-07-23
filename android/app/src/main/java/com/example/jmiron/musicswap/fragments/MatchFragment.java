@@ -15,6 +15,7 @@ import com.example.jmiron.musicswap.adapters.MatchAdapter;
 import com.example.jmiron.musicswap.data.MatchContainer;
 import com.example.jmiron.musicswap.handlers.PreferencesHandler;
 import com.example.jmiron.musicswap.handlers.ServerHandler;
+import com.example.jmiron.musicswap.interfaces.ViewPagerFragmentInterface;
 import com.github.nkzawa.emitter.Emitter;
 
 import org.json.JSONArray;
@@ -24,7 +25,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class MatchFragment extends Fragment {
+public class MatchFragment extends Fragment implements ViewPagerFragmentInterface {
 
     private ArrayList<MatchContainer> mMatchArray = new ArrayList<>();
     private MatchAdapter mMatchAdapter;
@@ -124,4 +125,8 @@ public class MatchFragment extends Fragment {
         mMatchArray.add(0, newMatch);
         mMatchAdapter.notifyItemInserted(0);
     }
+
+    @Override
+    public void fragmentSelected() { }
+    public void fragmentScrolled(){ }
 }

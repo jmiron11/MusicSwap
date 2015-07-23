@@ -55,7 +55,6 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
             artistArt = (ImageView) itemView.findViewById(R.id.match_art);
         }
 
-
         public void setArtist(String newArtist){ artist.setText(newArtist); }
         public void setUsername(String newName){ username.setText(newName); }
         public void setArtistArt(int imageResource){ artistArt.setImageResource(imageResource); }

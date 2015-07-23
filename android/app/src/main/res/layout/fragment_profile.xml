@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Username"
-            android:id="@+id/username"
+            android:id="@+id/usersUsername"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.7"
             android:gravity="left|center"

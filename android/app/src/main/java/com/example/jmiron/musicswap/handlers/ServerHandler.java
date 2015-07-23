@@ -5,6 +5,7 @@ import android.util.Log;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,19 +42,17 @@ public class ServerHandler {
 
     public static boolean isConnected(){ return mSocket.connected(); }
 
-    public static void saveProfile(String username, String artist1, String artist2, String artist3) {
+    public static void saveProfile(String username, JSONArray artists) {
         if (mSocket.connected())
         {
             JSONObject new_profile = new JSONObject();
             try {
                 new_profile.put("username", username);
-                new_profile.put("artist1", artist1);
-                new_profile.put("artist2", artist2);
-                new_profile.put("artist3", artist3);
+                new_profile.put("artists", artists);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            mSocket.emit("new_profile", new_profile);
+            mSocket.emit("update_profile", new_profile);
         }
         else
         {
@@ -61,20 +60,11 @@ public class ServerHandler {
         }
     }
 
-    public static void findMatch(String username, String artist1, String artist2, String artist3)
+    public static void findMatch(String username, JSONArray artists)
     {
         if(mSocket.connected())
         {
-            JSONObject new_profile = new JSONObject();
-            try {
-                new_profile.put("username", username);
-                new_profile.put("artist1", artist1);
-                new_profile.put("artist2", artist2);
-                new_profile.put("artist3", artist3);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            mSocket.emit("find_match", new_profile);
+            mSocket.emit("find_match", artists);
         }
         else
         {

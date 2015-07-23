@@ -8,19 +8,16 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.jmiron.musicswap.R;
 import com.example.jmiron.musicswap.adapters.MainPagerAdapter;
-import com.example.jmiron.musicswap.adapters.NewProfilePagerAdapter;
 import com.example.jmiron.musicswap.handlers.LastFmHandler;
 import com.example.jmiron.musicswap.handlers.ServerHandler;
-import com.github.nkzawa.socketio.client.Socket;
+import com.example.jmiron.musicswap.interfaces.ViewPagerFragmentInterface;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static Socket mSocket;
     public static String username;
 
     ViewPager mViewPager;
     MainPagerAdapter mAdapter;
-    NewProfilePagerAdapter mProfileAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +33,26 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.mainPager);
         mViewPager.setAdapter(mAdapter);
         mViewPager.setCurrentItem(1);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
-        if(!prevProfileExists()){
-            Intent intent = new Intent(this, NewProfileActivity.class);
-            startActivity(intent);
-        }
+            public void onPageSelected(int pageNumber) {
+                ViewPagerFragmentInterface fragment = (ViewPagerFragmentInterface) mAdapter.instantiateItem(mViewPager, pageNumber);
+                if (fragment != null) {
+                    fragment.fragmentSelected();
+                }
+            }
+
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                ViewPagerFragmentInterface fragment = (ViewPagerFragmentInterface) mAdapter.instantiateItem(mViewPager, position);
+                if (fragment != null) {
+                    fragment.fragmentScrolled();
+                }
+            }
+
+            public void onPageScrollStateChanged(int arg0) {
+
+            }
+        });
     }
 
     @Override

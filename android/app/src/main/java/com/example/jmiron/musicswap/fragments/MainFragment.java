@@ -2,6 +2,7 @@ package com.example.jmiron.musicswap.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,18 +16,21 @@ import com.example.jmiron.musicswap.adapters.MessageAdapter;
 import com.example.jmiron.musicswap.adapters.ProfileArtistAdapter;
 import com.example.jmiron.musicswap.data.MessageContainer;
 import com.example.jmiron.musicswap.data.ProfileArtistContainer;
+import com.example.jmiron.musicswap.dialogs.NewUserDialogFragment;
 import com.example.jmiron.musicswap.dialogs.NoConnectionDialogFragment;
 import com.example.jmiron.musicswap.handlers.PreferencesHandler;
 import com.example.jmiron.musicswap.handlers.ServerHandler;
+import com.example.jmiron.musicswap.interfaces.ViewPagerFragmentInterface;
 import com.github.nkzawa.emitter.Emitter;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements ViewPagerFragmentInterface {
 
     private ArrayList<MessageContainer> mMessageArray = new ArrayList<>();
     private MessageAdapter mMessageAdapter;
@@ -97,7 +101,11 @@ public class MainFragment extends Fragment {
 
         if(PreferencesHandler.getFirst(getActivity()))
         {
-            addInfo(new MessageContainer("Welcome", "THIS IS A MESSAGE", R.drawable.albumartph40, 0));
+            addInfo(new MessageContainer("Welcome", "THIS IS A MESSAGE", R.drawable.squirrel, 0));
+
+            NewUserDialogFragment newUsernameDialog = new NewUserDialogFragment();
+            newUsernameDialog.show(getActivity().getSupportFragmentManager(), "New Username");
+
             PreferencesHandler.setFirstFalse(getActivity());
         }
 
@@ -124,6 +132,7 @@ public class MainFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList("info", mMessageArray);
+        PreferencesHandler.storeMessages(getActivity(), mMessageArray);
     }
 
     @Override
@@ -157,18 +166,20 @@ public class MainFragment extends Fragment {
                     noConnDialog.show(getActivity().getSupportFragmentManager(), "No Connection");
                 }
 
-                //TODO: Get this to send an array
                 final String username = PreferencesHandler.getUsername(getActivity());
                 ArrayList<ProfileArtistContainer> artists = PreferencesHandler.getArtists(getActivity());
-                if(artists.size() >= 3)
-                {
-                    String artist1 = artists.get(0).artist;
-                    String artist2 = artists.get(1).artist;
-                    String artist3 = artists.get(2).artist;
-                    ServerHandler.findMatch(username, artist1, artist2, artist3);
+                ArrayList<String> artistsName = new ArrayList<>();
+                for(ProfileArtistContainer artist : artists){
+                    artistsName.add(artist.artist);
                 }
+                JSONArray toSend = new JSONArray(artistsName);
+                ServerHandler.findMatch(username, toSend);
             }
         };
         return ret;
     }
+
+    @Override
+    public void fragmentSelected() { }
+    public void fragmentScrolled(){ }
 }

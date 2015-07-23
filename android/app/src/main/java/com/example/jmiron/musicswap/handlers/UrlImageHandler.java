@@ -27,6 +27,7 @@ public class UrlImageHandler {
         @Override
         protected Bitmap doInBackground(String... urls) {
             String imgUrl = urls[0];
+            if(imgUrl == null) return null;
             Bitmap imgBitmap = null;
             try {
                 InputStream in = new java.net.URL(imgUrl).openStream();

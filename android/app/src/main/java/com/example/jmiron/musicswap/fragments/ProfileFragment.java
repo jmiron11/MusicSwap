@@ -12,22 +12,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.jmiron.musicswap.R;
 import com.example.jmiron.musicswap.adapters.ProfileArtistAdapter;
 import com.example.jmiron.musicswap.data.ProfileArtistContainer;
 import com.example.jmiron.musicswap.dialogs.AddArtistDialogFragment;
 import com.example.jmiron.musicswap.dialogs.NoConnectionDialogFragment;
+import com.example.jmiron.musicswap.handlers.LastFmHandler;
 import com.example.jmiron.musicswap.handlers.PreferencesHandler;
 import com.example.jmiron.musicswap.handlers.ServerHandler;
+import com.example.jmiron.musicswap.handlers.UrlImageHandler;
+import com.example.jmiron.musicswap.interfaces.ViewPagerFragmentInterface;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 
-public class ProfileFragment extends Fragment implements AddArtistDialogFragment.AddArtistDialogFragmentListener {
+public class ProfileFragment extends Fragment implements AddArtistDialogFragment.AddArtistDialogFragmentListener, ViewPagerFragmentInterface {
     private ArrayList<ProfileArtistContainer> mArtistArray = new ArrayList<>();
     private ProfileArtistAdapter mArtistAdapter;
     private RecyclerView mArtistView;
+    private TextView username;
 
     public static ProfileFragment newInstance() {
         ProfileFragment fragment = new ProfileFragment();
@@ -71,6 +79,9 @@ public class ProfileFragment extends Fragment implements AddArtistDialogFragment
         ImageButton addArtistBtn = (ImageButton) v.findViewById(R.id.addArtistBtn);
         addArtistBtn.setOnClickListener(onAddArtistClick());
 
+        username = (TextView) v.findViewById(R.id.usersUsername);
+        username.setText(PreferencesHandler.getUsername(getActivity()));
+
 
         return v;
     }
@@ -104,11 +115,6 @@ public class ProfileFragment extends Fragment implements AddArtistDialogFragment
 
     private void addArtist(final ProfileArtistContainer newArtist)
     {
-        /* check for artist art, if it doesn't exist, get it */
-        if(newArtist.artName == null)
-        {
-
-        }
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -116,6 +122,13 @@ public class ProfileFragment extends Fragment implements AddArtistDialogFragment
                 mArtistAdapter.notifyItemInserted(0);
             }
         });
+        String user = username.getText().toString().trim();
+        ArrayList<String> artistArray = new ArrayList<>();
+        for(ProfileArtistContainer artistIn : mArtistArray)
+        {
+            artistArray.add(artistIn.artist);
+        }
+        ServerHandler.saveProfile(user, new JSONArray(artistArray));
     }
 
     private Button.OnClickListener onAddArtistClick() {
@@ -133,5 +146,12 @@ public class ProfileFragment extends Fragment implements AddArtistDialogFragment
     @Override
     public void onDialogMessage(String artistName) {
         addArtist(new ProfileArtistContainer(artistName));
+        PreferencesHandler.saveArtists(getActivity(), mArtistArray);
     }
+
+    @Override
+    public void fragmentSelected() {
+
+    }
+    public void fragmentScrolled(){ }
 }

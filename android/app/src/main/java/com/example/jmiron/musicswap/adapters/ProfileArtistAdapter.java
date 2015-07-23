@@ -3,6 +3,7 @@ package com.example.jmiron.musicswap.adapters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,9 @@ import android.widget.TextView;
 
 import com.example.jmiron.musicswap.R;
 import com.example.jmiron.musicswap.data.ProfileArtistContainer;
+import com.example.jmiron.musicswap.handlers.BitmapStorageHandler;
+import com.example.jmiron.musicswap.handlers.LastFmHandler;
+import com.example.jmiron.musicswap.handlers.UrlImageHandler;
 
 import java.util.ArrayList;
 
@@ -20,9 +24,11 @@ import java.util.ArrayList;
 public class ProfileArtistAdapter extends RecyclerView.Adapter<ProfileArtistAdapter.ViewHolder> {
 
     private ArrayList<ProfileArtistContainer> mArtists;
+    Context mContext;
 
     public ProfileArtistAdapter(Context context, ArrayList<ProfileArtistContainer> artistData) {
         mArtists = artistData;
+        mContext = context;
     }
 
     //TODO: Set this adapter to grid view
@@ -36,10 +42,7 @@ public class ProfileArtistAdapter extends RecyclerView.Adapter<ProfileArtistAdap
     public void onBindViewHolder(ViewHolder holder, int position) {
         ProfileArtistContainer artistProfile = mArtists.get(position);
         holder.setArtistName(artistProfile.artist);
-
-        if(artistProfile.artName != null)
-            holder.setDefaultArt(); // TODO: Set to proper art
-        else holder.setDefaultArt();
+        holder.setArtistArt(artistProfile.artist);
     }
 
     @Override
@@ -60,8 +63,28 @@ public class ProfileArtistAdapter extends RecyclerView.Adapter<ProfileArtistAdap
         }
 
         public void setArtistName(String newName) { artistName.setText(newName); }
-        public void setArtistArt(Bitmap ArtistArt) { artistArt.setImageBitmap(ArtistArt); }
-        public void setDefaultArt(){ artistArt.setImageResource(R.drawable.albumartph80); }
+        public void setArtistArt(String artistName) {
+            /* if it doesnt't exist */
+            Bitmap art = BitmapStorageHandler.loadFromFile(artistName + ".png", mContext);
+            if(art != null) {
+                artistArt.setImageBitmap(art);
+            }
+            else
+            {
+                art = UrlImageHandler.getUrlBitmap(LastFmHandler.getArtistArtUrl(artistName));
+                if(art == null)
+                {
+                    setDefaultArt();
+                    return;
+                }
+                else
+                {
+                    BitmapStorageHandler.saveToFile(artistName + ".png", art, mContext);
+                    artistArt.setImageBitmap(art);
+                }
+            }
+        }
 
+        public void setDefaultArt(){ artistArt.setImageResource(R.drawable.albumartph80); }
     }
 }

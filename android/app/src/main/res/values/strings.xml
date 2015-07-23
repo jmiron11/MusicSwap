@@ -18,5 +18,5 @@
     <string name="title_activity_new_profile">NewProfileActivity</string>
     <string name="add_artist">Add Artist</string>
     <string name="cancel">Cancel</string>
-
+    <string name="choose_a_username">Choose a Username: </string>
 </resources>
