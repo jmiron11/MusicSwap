@@ -11,3 +11,4 @@
 /server/node_modules/mongoose
 /server/node_modules/socket.io
 /server/node_modules/socket.io-client
+/server/node_modules/mongodb
