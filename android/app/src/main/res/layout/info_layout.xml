@@ -8,14 +8,18 @@
         android:layout_height="wrap_content"
         android:id="@+id/infoArt"
         android:layout_margin="15dp"
-        android:minHeight="20dp"
-        android:minWidth="20dp" />
+        android:minHeight="50dp"
+        android:minWidth="50dp"
+        android:maxHeight="50dp"
+        android:maxWidth="50dp"
+        android:layout_gravity="center_vertical"
+        android:adjustViewBounds= "true"/>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_gravity="center_vertical">
 
         <TextView
             android:id="@+id/infoName"
@@ -23,13 +27,15 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:text="Info Item"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_gravity="left|center_vertical" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Medium Text"
-            android:id="@+id/infoDetail" />
+            android:id="@+id/infoDetail"
+            android:layout_gravity="left|center_vertical" />
 
     </LinearLayout>
 
